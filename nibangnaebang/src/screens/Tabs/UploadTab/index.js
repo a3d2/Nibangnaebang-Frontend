@@ -29,7 +29,7 @@ const defaultNavOptions = ({ navigation }) => {
         headerBackTitle:null,
         title: '방올리기',
         headerTitleStyle: {
-            fontWeight: 500,
+            fontWeight: '500',
             fontSize:17,
             color:colors.darkGrey
         },
