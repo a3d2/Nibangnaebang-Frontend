@@ -1,0 +1,164 @@
+/* eslint no-useless-escape: 0 */
+
+import React, { Component } from 'react'
+import { Platform } from 'react-native'
+import PropTypes from 'prop-types'
+import styled from 'styled-components/native';
+import colors from '../../../colors/colors';
+import TextInput, { InputType } from './TextInput';
+import assets from "@assets/general";
+
+const MARGIN_GAP = 10;
+
+class Input extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showPassword:false,
+            accWidth:0
+        };
+    }
+
+    toggleShowPassword = () => {
+        this.setState({ showPassword:!this.state.showPassword })
+    }
+
+    onSubmitEditing = () => {
+        const { onSubmitEditing } = this.props;
+        const { value } = this.state;
+        onSubmitEditing && onSubmitEditing(value)
+    }
+
+    render() {
+        const {
+            containerStyle,
+            accContainerStyle,
+            type,
+            inputStyle,
+            accessoryView,
+            removeUnderline,
+            errorMessage
+        } = this.props;
+
+        const { showPassword, accWidth } = this.state;
+
+        const isPassword = type === InputType.password;
+
+
+        return (
+            <Container>
+                <InnerContainer
+                    paddingRight={isPassword ? 25 : (accWidth + MARGIN_GAP || 0)}
+                    underline={!removeUnderline}
+                    style={containerStyle}
+                >
+                    <TextInput
+                        {...this.props}
+                        style={inputStyle}
+                        {...type}
+
+                        secureTextEntry={!showPassword && isPassword}
+                        onSubmitEditing={this.onSubmitEditing}
+                    />
+                    {isPassword && 
+                        <VisibilityButton
+                            removeUnderline={removeUnderline}
+                            onPress={this.toggleShowPassword}
+                        >
+                            <EyeIcon
+                                source={showPassword ? assets.iconViewPink : assets.iconViewGray}
+                            />
+                        </VisibilityButton>
+                    }
+                    <AccessoryContainer
+                        onLayout={(e) => {
+                            const { width } = e.nativeEvent.layout;
+                            this.setState({ accWidth:width })
+                        }}
+                        style={accContainerStyle}
+                    >
+                        {accessoryView}
+                    </AccessoryContainer>
+                </InnerContainer>
+                {!!errorMessage &&
+                    <ErrorContainer>
+                        <ErrorText>
+                            {errorMessage}
+                        </ErrorText>
+                    </ErrorContainer>
+                }
+            </Container>
+        );
+    }
+}
+
+Input.propTypes = {
+    onSubmitEditing:PropTypes.func.isRequired,
+    onChangeText:PropTypes.func.isRequired,
+    placeholder:PropTypes.string.isRequired,
+    type:PropTypes.object.isRequired,
+    containerStyle:PropTypes.object,
+    inputStyle:PropTypes.object,
+    accContainerStyle:PropTypes.object,
+    inputRef:PropTypes.func,
+    accessoryView:PropTypes.element,
+    accessoryWidth:PropTypes.number,
+    removeUnderline:PropTypes.bool,
+    errorMessage:PropTypes.string,
+};
+
+Input.defaultProps = {
+    placeholder:'',
+    type:InputType.default,
+    containerStyle:{},
+    inputStyle:{},
+    accContainerStyle:{},
+    returnKeyType:'done',
+    blurOnSubmit:false,
+    removeUnderline:false,
+    errorMessage:''
+}
+
+const Container = styled.View`
+`;
+
+const InnerContainer = styled.View`
+    display: flex;
+    flex-direction:row;
+    width:100%;
+    margin-top:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
+    padding-bottom:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
+    border-bottom-width:${props => props.underline ? 1 : 0};
+    border-bottom-color:${colors.veryLightBlue};
+    padding-right:${props => props.paddingRight};
+`;
+
+const VisibilityButton = styled.TouchableOpacity`
+    position:absolute;
+    top: ${Platform.OS === "ios" ? 0 : 15};
+    right: 0;
+    bottom: 0;
+    justify-content:center;
+    align-items:center;
+    padding:5px;
+    padding-right:0px;
+`;
+const EyeIcon = styled.Image`
+    width:17; height:17;
+`;
+
+const AccessoryContainer = styled.View`
+`;
+
+const ErrorContainer = styled.View`
+    margin-top:9.5;
+`;
+
+const ErrorText = styled.Text`
+    color:${colors.softBlue};
+    font-size:12;
+
+`;
+
+export default Input;
