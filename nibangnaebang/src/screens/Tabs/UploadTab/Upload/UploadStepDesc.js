@@ -12,7 +12,7 @@ import Input from '../../../../components/data/input/Input';
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
-    createRoom:stores.room.createRoom
+    createRoom:stores.room.createRoom,
     user:stores.auth.user
 }))
 class UploadStepDesc extends React.Component {
