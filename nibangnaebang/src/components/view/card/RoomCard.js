@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 import NormalButton from '../../feedback/button/NormalButton';
+import colors from '../../../colors/colors';
 
 class RoomCard extends Component {
     constructor(props) {
@@ -32,7 +33,10 @@ class RoomCard extends Component {
                         <SchoolName>
                             {data.school}
                         </SchoolName>
-                        <Title>
+                        <Title
+                            numberOfLines={2}
+                            ellipsizeMode='tail'
+                        >
                             {data.title}
                         </Title>
                         <Period>
@@ -69,9 +73,10 @@ const Container = styled.TouchableOpacity`
     margin-bottom:20;
 `;
 const InnerContainer = styled.TouchableOpacity`
-    padding:20px;
+    padding-horizontal:20px;
+    padding-vertical:16px;
     border-bottom-width:1px;
-    border-bottom-color:black;
+    border-bottom-color:rgba(0,0,0,0.06);
     flex-direction:row;
 `;
 
@@ -79,24 +84,44 @@ const LeftContainer = styled.View`
 `;
 
 const Image = styled.Image`
-    width:100;
-    height:120;
+    width:120;
+    height:100;
+    border-radius:8;
+    background-color:${colors.veryLightGrey};
 `;
 
 const RightContainer = styled.View`
+    margin-left:16;
     flex:1;
 `;
 
 const SchoolName = styled.Text`
+    font-size:13;
+    line-height:19;
+    letter-spacing:-0.3;
+    color:${colors.blueyGrey};
 `;
 
 const Title = styled.Text`
+    font-size:17;
+    font-weight:bold;
+    line-height:21;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
 `;
 
 const Period = styled.Text`
+    font-size:13;
+    line-height:18;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
 `;
 
 const Price = styled.Text`
+    font-size:13;
+    line-height:18;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
 `;
 
 export default RoomCard;

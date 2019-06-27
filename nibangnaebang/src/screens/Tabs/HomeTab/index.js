@@ -8,6 +8,11 @@ const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
 
     switch (routeName) {
+        case HomeStacks.Home:
+            return {
+                header: null,
+                headerBackTitle: null
+            };
     }
 };
 

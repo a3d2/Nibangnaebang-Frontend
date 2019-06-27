@@ -1,6 +1,8 @@
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import * as Tab from '../screens/Tabs';
 import React from 'react'
+import TabIcon from '../components/view/icon/TabIcon';
+import colors from '../colors/colors';
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
@@ -8,25 +10,19 @@ const defaultNavOptions = ({ navigation }) => {
     switch (routeName) {
         default:
           return {
-                // tabBarIcon: ({ focused }) => {
-                //     return <TabIcon type={routeName} focused={focused}/>;
-                // },
-                // tabBarOptions: {
-                //     activeTintColor: 'white',
-                //     inactiveTintColor: 'rgba(255, 255, 255, 0.35)',
-                //     labelStyle: {
-                //         fontSize: 10,
-                //     },
-                //     style: {
-                //         backgroundColor: colors.softBlue,
-                //     },
-                // },
-                // tabBarOnPress: ({ navigation, defaultHandler }) => {
-                //     if(routeName === TabsConfig.Home) {
-                //         navigation.popToTop()
-                //     }
-                //     defaultHandler();
-                // }
+                tabBarIcon: ({ focused }) => {
+                    return <TabIcon type={routeName} focused={focused}/>;
+                },
+                tabBarOptions: {
+                    activeTintColor: colors.mainBlue,
+                    inactiveTinitColor: colors.blueyGrey,
+                    labelStyle: {
+                        fontSize: 10,
+                    },
+                },
+                style: {
+                    backgroundColor:'white',
+                }
           };
     }
 };

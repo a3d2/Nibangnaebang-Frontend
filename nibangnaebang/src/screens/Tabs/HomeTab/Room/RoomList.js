@@ -7,6 +7,9 @@ import { Modal } from 'react-native'
 import FilterView from '../../../../components/feedback/filter/FilterView';
 import NormalButton from '../../../../components/feedback/button/NormalButton';
 import RoomMapView from '../../../../components/view/map/MapView';
+import assets from "@assets/general";
+import SearchInput from '../../../../components/data/input/SearchInput';
+import { StatusBarHeight } from '../../../../utils/utils';
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
@@ -85,17 +88,31 @@ class RoomList extends React.Component {
 
         return (
             <Container>
+                <SearchContainer>
+                    <SearchInput
+                        placeholder={'학교나 장소를 입력해주세요'}
+                        // onSearchInputChange={this.onSearchInputChange}
+                        // onSearch={this.search}
+                    />
+                </SearchContainer>
                 <HeaderContainer>
-                    <FilterButton
-                        onPress={this.openFilter}
-                    >
-
-                    </FilterButton>
-                    <MapButton
-                        onPress={this.openMap}
-                    >
-                        
-                    </MapButton>
+                    <CountContainer>
+                        <CountText>
+                            검샘ㅇㄴㄹㅁ ㄴㅇㄹ
+                        </CountText>
+                    </CountContainer>
+                    <ButtonContainer>
+                        <FilterButton
+                            onPress={this.openFilter}
+                        >
+                            <FilterIcon source={assets.iconFilter}/>
+                        </FilterButton>
+                        <MapButton
+                            onPress={this.openMap}
+                        >
+                            <MapIcon source={assets.iconMap}/>
+                        </MapButton>
+                    </ButtonContainer>
                 </HeaderContainer>
                 {roomsView}
                 <Modal
@@ -136,23 +153,47 @@ RoomList.defaultProps = {
 }
 
 const Container = styled.ScrollView`
+    padding-top: ${StatusBarHeight()};
     flex:1;
+`;
+
+const SearchContainer = styled.View`
+    padding-horizontal:20;
+    padding-vertical:4;
 `;
 
 const HeaderContainer = styled.View`
     flex-direction:row;
+    justify-content:space-between;
+    align-items:center;
+    height:40;
+    padding-horizontal:10;
+`;
+const CountContainer = styled.View`
+    padding-left:10;
+`;
+const CountText = styled.Text`
 `;
 
+const ButtonContainer = styled.View`
+    flex-direction:row;
+    align-items:center;
+`;
 const FilterButton = styled.TouchableOpacity`
-    width:50;
-    height:50;
-    background-color:black;
+`;
+const FilterIcon = styled.Image`
+    width:23;
+    height:22;
+    padding:10px;
 `;
 
 const MapButton = styled.TouchableOpacity`
-    width:50;
-    height:50;
-    background-color:blue;
+`;
+const MapIcon = styled.Image`
+    width:22;
+    height:22;
+    margin-left:8;
+    padding:10px;
 `;
 
 const FilterContainer = styled.View`

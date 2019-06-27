@@ -4,4 +4,6 @@ export default Colors = {
     veryLightGrey:"#d8d8d8",
     blueyGrey:"#97979d",
     darkGrey:"#222426",
+
+    paleGrey:"#f2f3f5",
 }

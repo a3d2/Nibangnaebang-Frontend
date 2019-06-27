@@ -16,7 +16,11 @@ class Home extends React.Component {
         this.state = {
         }
     }
+    componentDidMount() {
+        this.props.setNav(this.props.navigation);
+    }
     
+
     render() {
         const { rooms } = this.props;
 

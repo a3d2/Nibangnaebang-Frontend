@@ -81,19 +81,6 @@ class Banner extends Component {
         );
     }
 
-    renderArrow = (isLeft=true) => {
-        return (
-            <ArrowContainer 
-                isLeft={isLeft}
-                onPress={() => {
-                    isLeft ? this._carousel.snapToPrev() : this._carousel.snapToNext();
-                }}
-            >
-                <ArrowIcon source={isLeft ? assets.iconBannerLeft : assets.iconBannerRight}/>
-            </ArrowContainer>
-        )
-    }
-
     render() {
         const { images } = this.props;
         const { loaded } = this.state;
@@ -120,8 +107,6 @@ class Banner extends Component {
                     />
                     { loaded && this.pagination }
                 </InnerContainer>
-                { loaded && this.renderArrow(true) }
-                { loaded && this.renderArrow(false) }
             </Container>
         );
     }

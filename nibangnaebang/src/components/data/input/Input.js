@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 import colors from '../../../colors/colors';
 import TextInput, { InputType } from './TextInput';
-import assets from "@assets/general";
 
 const MARGIN_GAP = 10;
 
@@ -61,16 +60,6 @@ class Input extends Component {
                         secureTextEntry={!showPassword && isPassword}
                         onSubmitEditing={this.onSubmitEditing}
                     />
-                    {isPassword && 
-                        <VisibilityButton
-                            removeUnderline={removeUnderline}
-                            onPress={this.toggleShowPassword}
-                        >
-                            <EyeIcon
-                                source={showPassword ? assets.iconViewPink : assets.iconViewGray}
-                            />
-                        </VisibilityButton>
-                    }
                     <AccessoryContainer
                         onLayout={(e) => {
                             const { width } = e.nativeEvent.layout;

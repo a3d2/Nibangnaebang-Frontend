@@ -56,9 +56,10 @@ const Container = styled.TouchableOpacity`
     flex-direction:row;
     justify-content:center;
     align-items:center;
-    padding: 12px 20px 11px;
-    max-height:40;
-    border-radius:20;
+    padding-top:16;
+    padding-bottom:15;
+    max-height:56;
+    border-radius:8;
     width:100%;
     background-color:${props => props.wired ? 'transparent' : props.bgColor};
     border-width:${props => props.wired ? 1 : 0};
