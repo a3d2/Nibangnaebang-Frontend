@@ -39,7 +39,7 @@ class Login extends React.Component {
     onPressLogin = () => {
         const { id, password } = this.state;
         const { login } = this.props;
-        login();
+        login(id, password);
     }
 
     onPressTour = () => {

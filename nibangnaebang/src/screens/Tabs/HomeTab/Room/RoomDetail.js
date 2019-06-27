@@ -53,19 +53,17 @@ class RoomDetail extends React.Component {
         return (
             <Container>
                 <Banner
-                    images={[`${IMAGE_URI}/${roomDetail.Dir}`]}
+                    images={roomDetail.images}
                 />
                 <ProfileContainer>
                     <ProfileImageContainer>
                         <ProfileImage
-                            // source={{ uri:user.image }}
-                            source={assets.iconFace}
+                            source={roomDetail.SellerGender === "male" ? assets.iconFaceM : assets.iconFaceW}
                         />
                     </ProfileImageContainer>
                     <ProfileInfoContainer>
                         <ProfileNameText>
-                            {/* {user.id} */}
-                            {faker.name.firstName()}
+                            {roomDetail.SellerName}
                         </ProfileNameText>
                         <ProfileSchoolText>
                             {`${roomDetail.School}`}

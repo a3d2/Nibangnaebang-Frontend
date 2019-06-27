@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 import faker from 'faker';
-import { BASE_URI } from "../constants/const";
+import { BASE_URI, IMAGE_URI } from "../constants/const";
 import { getBody, tuneObjectWithKey } from "../utils/utils";
 
 class RoomStore {
@@ -43,6 +43,9 @@ class RoomStore {
         })
         .then(res => res.json())
         .then((detail) => {
+            detail.images= detail.images.map(each => {
+                return `${IMAGE_URI}/${each.Dir}`
+            })
             this.rooms[no] = { ...this.rooms[no], ...detail }
 
             return new Promise((resolve, _) => {

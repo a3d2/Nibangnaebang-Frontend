@@ -1,24 +1,58 @@
 import { observable, action } from "mobx";
 import faker from 'faker';
+import { getBody } from "../utils/utils";
+import { BASE_URI } from "../constants/const";
 
 class MessageStore {
-    @observable messages = [
-        {
-            id:faker.random.uuid(),
-            from:faker.random.uuid(),
-            to:faker.random.uuid(),
-            message:faker.lorem.sentence(),
-            date:faker.date.recent(),
-        }
-    ]
-    @observable messagesList = [
-        {
-            id:faker.random.uuid(),
-            from:faker.random.uuid(),
-            to:faker.random.uuid(),
-            message:faker.lorem.sentence(),
-            date:faker.date.recent(),
-        }
-    ]
+    @observable messages = [ ]
+    @observable rooms = {
+    }
+
+    @action
+    loadMessages = async (userNo) => {
+        return fetch(`${BASE_URI}`, {
+            method: 'POST',
+            body:getBody({
+                query:"getSummaryMessage",
+                nowUser:userNo
+            })
+        })
+        .then(res => res.json())
+        .then((messages) => {
+            this.messages = messages;
+
+            return new Promise((resolve, _) => {
+                resolve(messages);
+            })
+        })
+        .catch(error => {
+            this.fetching = false;
+            console.error(error);
+        });
+    }
+
+
+    @action
+    loadMessageDetail = async (roomNo) => {
+        return fetch(`${BASE_URI}`, {
+            method: 'POST',
+            body:getBody({
+                query:"getFullMessage",
+                roomNo:roomNo
+            })
+        })
+        .then(res => res.json())
+        .then((res) => {
+            this.rooms[roomNo] = res;
+
+            return new Promise((resolve, _) => {
+                resolve(res);
+            })
+        })
+        .catch(error => {
+            this.fetching = false;
+            console.error(error);
+        });
+    }
 }
 export default new MessageStore();

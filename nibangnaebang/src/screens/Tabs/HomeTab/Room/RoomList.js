@@ -107,7 +107,7 @@ class RoomList extends React.Component {
                 <HeaderContainer>
                     <CountContainer>
                         <CountText>
-                            검샘ㅇㄴㄹㅁ ㄴㅇㄹ
+                            {`검색결과 ${rooms.length}건`}
                         </CountText>
                     </CountContainer>
                     <ButtonContainer>

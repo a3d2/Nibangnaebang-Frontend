@@ -4,7 +4,9 @@ import styled from 'styled-components/native';
 import MessageList from './MessageList';
 
 @inject(stores => ({
-    messagesList:stores.message.messagesList
+    messagesList:stores.message.messagesList,
+    loadMessages:stores.message.loadMessages,
+    user:stores.auth.user
 }))
 class Message extends React.Component {
     constructor(props) {
@@ -14,14 +16,16 @@ class Message extends React.Component {
         }
     }
 
-    render() {
-        const { messagesList } = this.props;
+    componentDidMount() {
+        const { loadMessages, user } = this.props;
+        loadMessages(user.UserNo);
+    }
+    
 
+    render() {
         return (
             <Container>
-                <MessageList
-                    messagesList={messagesList}
-                />
+                <MessageList/>
             </Container>
         );
     }
