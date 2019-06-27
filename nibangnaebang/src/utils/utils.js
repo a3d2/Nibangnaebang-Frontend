@@ -105,3 +105,9 @@ export const tuneObjectWithKey = (obj, keyName) => {
 export const capitalizeFirst = (str) => {
     return str && str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export const getBody = (object) => {
+    const formData = new FormData()
+    formData.append('jsonString', JSON.stringify(object));
+    return formData;
+}

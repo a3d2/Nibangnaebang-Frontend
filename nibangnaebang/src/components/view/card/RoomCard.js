@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 import NormalButton from '../../feedback/button/NormalButton';
 import colors from '../../../colors/colors';
+import { IMAGE_URI } from '../../../constants/const';
 
 class RoomCard extends Component {
     constructor(props) {
@@ -26,24 +27,24 @@ class RoomCard extends Component {
                 >
                     <LeftContainer>
                         <Image
-                            source={{ uri:data.images[0] }}
+                            source={{ uri:`${IMAGE_URI}/${data.Dir}` }}
                         />
                     </LeftContainer>
                     <RightContainer>
                         <SchoolName>
-                            {data.school}
+                            {data.School}
                         </SchoolName>
                         <Title
                             numberOfLines={2}
                             ellipsizeMode='tail'
                         >
-                            {data.title}
+                            {data.Title}
                         </Title>
                         <Period>
-                            {data.period}
+                            {/* {data.period} */}
                         </Period>
                         <Price>
-                            {data.price}
+                            {data.Pay}
                         </Price>
                     </RightContainer>
                 </InnerContainer>

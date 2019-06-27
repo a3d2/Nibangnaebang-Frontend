@@ -7,7 +7,7 @@ import RoomList from './Room/RoomList';
     setNav:stores.nav.setNav,
     navTo:stores.nav.navTo,
     spin:stores.spinner.spin,
-    rooms:stores.room.rooms
+    loadRooms:stores.room.loadRooms,
 }))
 class Home extends React.Component {
     constructor(props) {
@@ -18,17 +18,15 @@ class Home extends React.Component {
     }
     componentDidMount() {
         this.props.setNav(this.props.navigation);
+
+        this.props.loadRooms();
     }
     
 
     render() {
-        const { rooms } = this.props;
-
         return (
             <Container>
-                <RoomList
-                    rooms={rooms}
-                />
+                <RoomList/>
             </Container>
         );
     }

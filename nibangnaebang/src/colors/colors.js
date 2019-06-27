@@ -6,4 +6,5 @@ export default Colors = {
     darkGrey:"#222426",
 
     paleGrey:"#f2f3f5",
+    steel:"#81848c"
 }
