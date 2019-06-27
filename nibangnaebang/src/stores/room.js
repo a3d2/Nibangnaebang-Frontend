@@ -9,6 +9,32 @@ class RoomStore {
     };
 
     @action
+    createRoom = async (room) => {
+        console.log("TCL: RoomStore -> createRoom -> room", room)
+        
+        return fetch(`${BASE_URI}`, {
+            method: 'POST',
+            body:getBody({
+                query:"Create",
+                room:room
+            })
+        })
+        .then(res => res.json())
+        .then(({ code, RoomNo }) => {
+            if(RoomNo) {
+                this.rooms[RoomNo] = room;
+            }
+            return new Promise((resolve, _) => {
+                resolve(RoomNo);
+            })
+        })
+        .catch(error => {
+            this.fetching = false;
+            console.error(error);
+        });
+    }
+
+    @action
     loadRooms = async () => {
         return fetch(`${BASE_URI}`, {
             method: 'POST',
@@ -20,7 +46,7 @@ class RoomStore {
         .then(({ code, room }) => {
             if(room) {
                 const tuned = tuneObjectWithKey(room, 'No');
-                this.rooms = { ...this.artists, ...tuned };
+                this.rooms = { ...this.rooms, ...tuned };
             }
             return new Promise((resolve, _) => {
                 resolve(room);
