@@ -61,7 +61,7 @@ class FilterView extends Component {
                         {periodTitle}
                     </Title>
                     <PeriodInnerContainer>
-                        <PeriodItemContainer left>
+                        <PeriodItemContainer>
                             <PeriodTitle>
                                 언제부터
                             </PeriodTitle>
@@ -73,7 +73,7 @@ class FilterView extends Component {
                                 </PeriodText>
                             </PeriodItemTextContainer>
                         </PeriodItemContainer>
-                        <PeriodItemContainer right>
+                        <PeriodItemContainer>
                             <PeriodTitle>
                                 언제까지
                             </PeriodTitle>
@@ -175,8 +175,8 @@ const PeriodInnerContainer = styled.View`
 `;
 const PeriodItemContainer = styled.View`
     flex:1;
-    margin-right:${props => props.left ? '5.5' : 0};
-    margin-left:${props => props.right ? '5.5' : 0};
+    margin-right:5.5;
+    margin-left:5.5;
 `;
 const PeriodTitle = styled.Text`
     font-weight:bold;
