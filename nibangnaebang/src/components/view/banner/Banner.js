@@ -144,19 +144,4 @@ const InnerContainer = styled.View`
     height: 100%;
 `;
 
-const ArrowContainer = styled.TouchableOpacity`
-    position:absolute;
-    display:flex;
-    align-self: center;
-    left:${props => props.isLeft ? 0 : 'auto'};
-    right:${props => props.isLeft ? 'auto' : 0};
-    padding:20px;
-    opacity:0.4;
-`;
-
-const ArrowIcon = styled.Image`
-    width:18;
-    height:32;
-`;
-
 export default Banner;
