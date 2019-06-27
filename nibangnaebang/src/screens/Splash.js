@@ -24,7 +24,6 @@ class Splash extends React.Component {
     render() {
         // A. navigate to tab if logged in
         const { spinning } = this.props;
-        console.log("TCL: Splash -> render -> spinning", spinning)
         
         if(true) {   //TODO to login
             return(
