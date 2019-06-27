@@ -3,6 +3,8 @@ import { inject } from 'mobx-react';
 import styled from 'styled-components/native';
 
 @inject(stores => ({
+    setNav:stores.nav.setNav,
+    navTo:stores.nav.navTo
 }))
 class Home extends React.Component {
     constructor(props) {
@@ -11,6 +13,15 @@ class Home extends React.Component {
         this.state = {
         }
     }
+    componentDidMount() {
+        const { navigation, setNav } = this.props;
+        setNav(navigation);
+    }
+
+    navToRoomDetail = () => {
+        const { navTo } = this.props;
+        navTo('RoomDeatil');
+    }
 
     render() {
         const { 
@@ -18,9 +29,11 @@ class Home extends React.Component {
 
         return (
             <Container>
-                <Text>
-                    home
-                </Text>
+                <Button onPress={this.navToRoomDetail}>
+                    <Text>
+                        nav
+                    </Text>
+                </Button>
             </Container>
         );
     }
@@ -29,6 +42,8 @@ class Home extends React.Component {
 const Container = styled.ScrollView`
 `;
 const Text = styled.Text`
+`;
+const Button = styled.TouchableOpacity`
 `;
 
 export default Home;
