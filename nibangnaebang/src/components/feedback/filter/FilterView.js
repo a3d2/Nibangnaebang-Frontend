@@ -44,7 +44,7 @@ class FilterView extends Component {
                         {periodTitle}
                     </Title>
                     <PeriodInnerContainer>
-                        <PeriodItemContainer left>
+                        <PeriodItemContainer>
                             <PeriodTitle>
                                 언제부터
                             </PeriodTitle>
@@ -56,7 +56,7 @@ class FilterView extends Component {
                                 </PeriodText>
                             </PeriodItemTextContainer>
                         </PeriodItemContainer>
-                        <PeriodItemContainer right>
+                        <PeriodItemContainer>
                             <PeriodTitle>
                                 언제부터
                             </PeriodTitle>
