@@ -1,6 +1,8 @@
 import React from 'react';
 import { inject } from 'mobx-react';
 import styled from 'styled-components/native';
+import NormalButton from '../../../components/feedback/button/NormalButton';
+
 
 @inject(stores => ({
     user:stores.auth.user,
@@ -66,23 +68,23 @@ class MyPage extends React.Component {
                     {this.renderSection('내 방', 'x개', 'MyRoom')}
                     {this.renderSection('니 방', 'y개', 'PickedRoom')}
                 </RoomsContainer>
-                <ConfigContainer>
-                    {this.renderSection('키워드 등록', '')}
-                    {this.renderSection('학생 인증', '')}
-                </ConfigContainer>
-                <LogoutContainer
+                {/* <ConfigContainer> */}
+                    {/* {this.renderSection('키워드 등록', '')} */}
+                    {/* {this.renderSection('학생 인증', '')} */}
+                {/* </ConfigContainer> */}
+
+                <NormalButton
                     onPress={logout}
-                >
-                    <LogoutText>
-                        로그아웃
-                    </LogoutText>
-                </LogoutContainer>
+                    label={'로그아웃'}
+                />
             </Container>
         );
     }
 }
 
 const Container = styled.ScrollView`
+    padding-horizontal:20;
+    padding-top:23;
 `;
 const ProfileContainer = styled.View`
     flex-direction:row;
@@ -90,17 +92,21 @@ const ProfileContainer = styled.View`
 const ProfileImageContainer = styled.View`
 `;
 const ProfileImage = styled.Image`
-    width:100;
-    height:100;
+    width:60;
+    height:60;
+    borderRadius:40;
 `;
 const ProfileInfoContainer = styled.View`
 `;
 const ProfileNameText = styled.Text`
+    padding-left:16;
+    padding-top:2;
 `;
 const ProfileDescContainer = styled.View`
     flex-direction:row;
 `;
 const ProfileIDText = styled.Text`
+    padding-left:16;
 `;
 const ProfileSchoolText = styled.Text`
 `;
@@ -127,8 +133,12 @@ const SectionItemRightContainer = styled.View`
 const SectionItemPreviewLabel = styled.Text`
 `;
 
+const Tab = styled.Text`
+    alignItems:center;
+    justifyContent:center;
+`;
+
 const ConfigContainer = styled.View`
-    margin-top:30px;
 `;
 
 const LogoutContainer = styled.TouchableOpacity`

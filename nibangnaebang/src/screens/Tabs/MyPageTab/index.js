@@ -13,7 +13,8 @@ const defaultNavOptions = ({ navigation }) => {
         default:
             return {
                 headerBackImage:<BackButton/>,
-                headerBackTitle: null
+                headerBackTitle: null,
+                title: '마이페이지',
             };
     }
 };

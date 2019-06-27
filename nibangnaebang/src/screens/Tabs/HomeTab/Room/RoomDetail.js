@@ -6,6 +6,7 @@ import faker from 'faker';
 import NormalButton from '../../../../components/feedback/button/NormalButton';
 import assets from '../../../../assets/general';
 import colors from '../../../../colors/colors';
+import BackButton from '../../../../components/feedback/button/BackButton';
 import { IMAGE_URI } from '../../../../constants/const';
 
 export const RoomStatus = {

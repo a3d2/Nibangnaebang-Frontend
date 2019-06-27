@@ -15,6 +15,10 @@ const assets = {
 
     iconLocation: require('./iconLocation.png'),
     iconSchool: require('./iconSchool.png'),
+
+    iconConfirm: require('./iconConfirm.png'),
+
+    iconOk: require('./iconOk.png'),
 };
 
 export default assets
