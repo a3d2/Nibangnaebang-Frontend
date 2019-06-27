@@ -12,6 +12,8 @@ import Input from '../../../../components/data/input/Input';
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
+    createRoom:stores.room.createRoom
+    user:stores.auth.user
 }))
 class UploadStepDesc extends React.Component {
     constructor(props) {
@@ -21,7 +23,6 @@ class UploadStepDesc extends React.Component {
             ...params,
 
             images:[],
-            cautionChecked:false,
 
             address:'',
             school:'',
@@ -70,7 +71,18 @@ class UploadStepDesc extends React.Component {
     }
 
     upload = () => {
-        console.log(this.state);
+        const { createRoom, user } = this.props;
+        createRoom({
+            title:this.state.title,
+            pay:this.state.price,
+            detail:this.state.desc,
+            address:this.state.address,
+            ALStart:this.state.startDate.dateString,
+            ALEnd:this.state.endDate.dateString,
+            school:this.state.school,
+            userNo:user.UserNo,
+            sameGender:this.state.switchValue ? 1 : 0,
+        })
     }
 
     render() {

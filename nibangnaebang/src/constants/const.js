@@ -1,6 +1,12 @@
 export const BASE_URI = 
   __DEV__ ?
     // 'http://localhost:3000'
-    'uri_for_dev'
+    'http://alldpublic.kr/NibangNaebangAPI/apiControl.php'
     :
-    'uri_for_live';
+    'http://alldpublic.kr/NibangNaebangAPI/apiControl.php';
+
+export const IMAGE_URI = 
+  __DEV__ ?
+    'http://alldpublic.kr/NibangNaebangAPI/Images'
+    :
+    'http://alldpublic.kr/NibangNaebangAPI/Images';

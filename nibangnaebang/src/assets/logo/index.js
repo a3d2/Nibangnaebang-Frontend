@@ -1,7 +1,7 @@
 const logoAssets = {
-	symbolAll: require('./symbolAll.png'),
-	symbolText: require('./symbolText.png'),
-	symbolText2: require('./symbolText2.png'),
+	mainLogo: require('./mainLogo.png'),
+	mainIcon: require('./mainIcon.png'),
+	mainCopy: require('./mainCopy.png'),
 };
 
 export default logoAssets

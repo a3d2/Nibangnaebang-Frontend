@@ -7,6 +7,7 @@ import MessageListItem from './MessageListItem';
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
+    messages:stores.message.messages,
 }))
 class MessageList extends React.Component {
     constructor(props) {
@@ -22,14 +23,14 @@ class MessageList extends React.Component {
     }
 
     render() {
-        const { messagesList } = this.props;
-        if(!messagesList) return;
+        const { messages } = this.props;
+        if(!messages) return;
 
-        const messagesView = messagesList.map((each) => {
+        const messagesView = messages.map((each) => {
             return (
                 <MessageListItem 
-                    key={each.id}
-                    preview={each.message}
+                    key={each.roomNo}
+                    {...each}
                     onPressItem={this.onPressItem.bind(this, each)}
                 />
             )
@@ -50,6 +51,7 @@ MessageList.defaultProps = {
 
 const Container = styled.ScrollView`
     flex:1;
+    padding-horizontal:20;
 `;
 
 export default MessageList;

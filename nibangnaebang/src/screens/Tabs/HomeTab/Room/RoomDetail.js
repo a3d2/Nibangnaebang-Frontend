@@ -6,6 +6,7 @@ import faker from 'faker';
 import NormalButton from '../../../../components/feedback/button/NormalButton';
 import assets from '../../../../assets/general';
 import colors from '../../../../colors/colors';
+import { IMAGE_URI } from '../../../../constants/const';
 
 export const RoomStatus = {
     onSale:'연락하기',
@@ -13,8 +14,16 @@ export const RoomStatus = {
     soldOut:'거래가 완료되었습니다',
 }
 
-@inject(stores => ({
-}))
+@inject((stores, ownProps) => {
+    const { params } = ownProps.navigation.state;
+    const roomDetail = stores.room.rooms[params.No];
+    
+    return {
+        navTo:stores.nav.navTo,
+        roomDetail:roomDetail,
+        loadRoomDetail:stores.room.loadRoomDetail
+    }
+})
 class RoomDetail extends React.Component {
     constructor(props) {
         super(props);
@@ -24,13 +33,19 @@ class RoomDetail extends React.Component {
         }
     }
 
+    componentDidMount() {
+        const { params } = this.props.navigation.state;
+        const { loadRoomDetail } = this.props;
+        loadRoomDetail(params.No).then(_ => this.forceUpdate)
+    }
+    
+
     onPressButton = () => {
 
     }
 
     render() {
-        const { user } = this.props;
-        const { params:data } = this.props.navigation.state;
+        const { roomDetail } = this.props;
         const { roomStatus } = this.state;
 
         const buttonLabel = roomStatus
@@ -38,48 +53,52 @@ class RoomDetail extends React.Component {
         return (
             <Container>
                 <Banner
-                    images={data.images}
+                    images={roomDetail.images}
                 />
                 <ProfileContainer>
                     <ProfileImageContainer>
                         <ProfileImage
-                            // source={{ uri:user.image }}
-                            source={assets.iconFace}
+                            source={roomDetail.SellerGender === "male" ? assets.iconFaceM : assets.iconFaceW}
                         />
                     </ProfileImageContainer>
                     <ProfileInfoContainer>
                         <ProfileNameText>
-                            {/* {user.id} */}
-                            {faker.name.firstName()}
+                            {roomDetail.SellerName}
                         </ProfileNameText>
                         <ProfileSchoolText>
-                            {`${data.school}`}
+                            {`${roomDetail.School}`}
                         </ProfileSchoolText>
                     </ProfileInfoContainer>
                     <MapButton>
                         <MapIcon source={assets.iconMap}/>
                     </MapButton>
                 </ProfileContainer>
+
+                <Divider/>
                 
                 <DescContainer>
-                        <Title>
-                            {data.title}
-                        </Title>
-                        <Location>
+                    <TextContainer>
+                        <LocationIcon source={assets.iconLocation}/>
+                            <Title>
+                                {roomDetail.Title}
+                            </Title>
+                    </TextContainer>
+                    <TextContainer>
+                        <SchoolIcon source={assets.iconSchool}/>
+                            <Location>
+                                {roomDetail.Address}
+                            </Location>
+                    </TextContainer>
 
-                        </Location>
-                    
-                    <Divider>
-                    </Divider>
-                    
+                    <Divider/>
                     
                     <Description>
-                        {data.desc}
+                        {roomDetail.Detail}
                     </Description>
                 </DescContainer>
-                <Divider>
 
-                </Divider>
+                <Divider/>
+
                 <BottomButtonContainer>
                     <NormalButton
                         onPress={this.onPressButton}
@@ -100,7 +119,8 @@ const ProfileContainer = styled.View`
     position:relative;
     align-items:center;
     padding-horizontal:20;
-    padding-vertical:20;
+    padding-top:20;
+    padding-bottom:6;
 `;
 const ProfileImageContainer = styled.View`
 `;
@@ -147,6 +167,26 @@ const Divider = styled.View`
     height:1;
     width:100%;
     background-color:${colors.paleGrey};
+    margin-vertical:16;
 `;
+
+const TextContainer = styled.View`
+    flex-direction:row;
+    align-items:center;
+    margin-bottom:8;
+`;
+
+const SchoolIcon = styled.Image`
+    width:15;
+    height:20;
+    margin-right:8;
+`;
+
+const LocationIcon = styled.Image`
+    width:15;
+    height:20;
+    margin-right:8;
+`;
+
 
 export default RoomDetail;

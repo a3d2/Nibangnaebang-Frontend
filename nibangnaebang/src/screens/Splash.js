@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { inject } from 'mobx-react';
+import { AsyncStorage } from 'react-native';
 import TabNavigator from "../navigators/TabNavigator";
 import AuthNavigator from "./Auth/index";
 
 @inject(stores => ({
     spinning:stores.spinner.spinning,
-    user:stores.auth.user
+    user:stores.auth.user,
+    login:stores.auth.login
 }))
 class Splash extends React.Component {
     backCounter = 0;
@@ -20,14 +22,20 @@ class Splash extends React.Component {
         console.disableYellowBox = true;
     }
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
+        const { login } = this.props;
+        const id = await AsyncStorage.getItem('id');
+        const pw = await AsyncStorage.getItem('pw');
+        if(id && pw)
+            await login(id, pw);
     }
 
     render() {
         // A. navigate to tab if logged in
         const { spinning, user } = this.props;
         
-        if(true || user.id) {
+        // if(true || user.UserNo) {
+        if(user.UserNo) {
             return(
                 <NavigatorContainer>
                     <TabNavigator/>

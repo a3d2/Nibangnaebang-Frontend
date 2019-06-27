@@ -12,9 +12,17 @@ import SearchInput from '../../../../components/data/input/SearchInput';
 import { StatusBarHeight } from '../../../../utils/utils';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
-@inject(stores => ({
-    navTo:stores.nav.navTo,
-}))
+@inject((stores) => {
+    const rooms = stores.room.rooms;
+    const roomsArray = Object.keys(rooms).map(each => {
+        return rooms[each];
+    })
+    
+    return {
+        navTo:stores.nav.navTo,
+        rooms:roomsArray
+    }
+})
 class RoomList extends React.Component {
     constructor(props) {
         super(props);
@@ -80,7 +88,7 @@ class RoomList extends React.Component {
         const roomsView = rooms.map((each) => {
             return (
                 <RoomCard 
-                    key={each.id}
+                    key={each.No}
                     data={each}
                     onPressItem={this.onPressItem.bind(this, each)}
                 />
@@ -99,7 +107,7 @@ class RoomList extends React.Component {
                 <HeaderContainer>
                     <CountContainer>
                         <CountText>
-                            검샘ㅇㄴㄹㅁ ㄴㅇㄹ
+                            {`검색결과 ${rooms.length}건`}
                         </CountText>
                     </CountContainer>
                     <ButtonContainer>
@@ -108,11 +116,11 @@ class RoomList extends React.Component {
                         >
                             <FilterIcon source={assets.iconFilter}/>
                         </FilterButton>
-                        <MapButton
+                        {/* <MapButton
                             onPress={this.openMap}
                         >
                             <MapIcon source={assets.iconMap}/>
-                        </MapButton>
+                        </MapButton> */}
                     </ButtonContainer>
                 </HeaderContainer>
                 {roomsView}

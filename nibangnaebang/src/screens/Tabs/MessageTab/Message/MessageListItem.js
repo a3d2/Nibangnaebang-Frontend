@@ -3,6 +3,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
+import assets from '../../../../assets/general';
+import colors from '../../../../colors/colors';
 
 class MessageListItem extends Component {
     constructor(props) {
@@ -13,38 +15,60 @@ class MessageListItem extends Component {
     }
 
     render() {
-        const { preview, onPressItem } = this.props;
+        const { lastMsg, otherUserId, otherUserGender, onPressItem } = this.props;
 
         return (
             <Container
                 onPress={onPressItem}
             >
-                <Preview>
-                    {preview}
-                </Preview>
+                <ProfileImage
+                    source={otherUserGender === "male" ? assets.iconFaceM : assets.iconFaceW}
+                />
+                <TextView>
+                    <Id>
+                        {otherUserId}
+                    </Id>
+                    <Preview>
+                        {lastMsg}
+                    </Preview>
+                </TextView>
             </Container>
         );
     }
 };
 
 MessageListItem.propTypes = {
-    preview:PropTypes.string.isRequired,
     onPressItem:PropTypes.func,
 };
 
 MessageListItem.defaultProps = {
-    preview:''
 }
 
 const Container = styled.TouchableOpacity`
-    padding:20px;
-    margin-bottom:20;
-    border-bottom-width:1px;
-    border-bottom-color:black;
     flex-direction:row;
+    border-bottom-width:1px;
+    border-bottom-color:${colors.lightPeriwinkle};
+    padding-vertical:20px;
 `;
 
+const ProfileImage = styled.Image`
+    width:36;
+    height:36;
+`;
+
+const TextView = styled.View`
+    margin-left:13;
+`;
+const Id = styled.Text`
+    font-size:15;
+    font-weight:bold;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
+`;
 const Preview = styled.Text`
+    font-size:15;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
 `;
 
 export default MessageListItem;
