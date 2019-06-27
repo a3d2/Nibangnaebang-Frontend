@@ -27,7 +27,7 @@ class Splash extends React.Component {
         // A. navigate to tab if logged in
         const { spinning, user } = this.props;
         
-        if(true || user.id) {
+        if(user.id) {
             return(
                 <NavigatorContainer>
                     <TabNavigator/>

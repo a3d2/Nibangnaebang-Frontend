@@ -171,7 +171,7 @@ class PriceCalculator extends React.Component {
                     <NormalButton
                         disabled={false}
                         onPress={this.onConfirm}
-                        label={`1일 ${calcPrice}원으로 계산하기`}
+                        label={`1일 ${numberWithCommas(calcPrice)}원으로 계산하기`}
                     />
                 </ConfirmButtonContainer>
             </Container>
