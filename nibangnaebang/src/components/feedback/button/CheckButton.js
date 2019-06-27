@@ -26,11 +26,6 @@ class CheckButton extends Component {
                 >
                     <CheckIcon source={assets.iconCheck}/>
                 </CheckBox>
-                {custom ||
-                    <ButtonText>
-                        {label}
-                    </ButtonText>
-                }
             </Container>
         );
     }
@@ -57,9 +52,9 @@ const CheckBox = styled.View`
     width:18;
     height:18;
     border-radius:9;
-    background-color:${props => props.checked ? colors.mainPink : 'white'};
+    background-color:${props => props.checked ? colors.mainBlue : 'white'};
     border-width:1;
-    border-color:${props => props.checked ? colors.mainPink : colors.lightPeriwinkle};
+    border-color:${props => props.checked ? colors.mainBlue : colors.lightPeriwinkle};
     margin-right:8;
     justify-content:center;
     align-items:center;
@@ -68,9 +63,5 @@ const CheckIcon = styled.Image`
     width:12;
     height:12;
 `
-const ButtonText = styled.Text`
-    font-size:12;
-    color:${colors.slateGrey};
-`;
 
 export default CheckButton;

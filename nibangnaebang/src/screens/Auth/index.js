@@ -2,6 +2,9 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Login from './Login';
 import { StackNavOptions } from "../../constants/styles";
+import RegisterInfo from './Register/RegisterInfo';
+import RegisterAuth from './Register/RegisterAuth';
+import RegisterComplete from './Register/RegisterComplete';
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
@@ -17,6 +20,9 @@ const defaultNavOptions = ({ navigation }) => {
 
 let Stacks = {
     Login: { screen: Login, navigationOptions:defaultNavOptions },
+    RegisterInfo: { screen: RegisterInfo, navigationOptions:defaultNavOptions },
+    RegisterAuth: { screen: RegisterAuth, navigationOptions:defaultNavOptions },
+    RegisterComplete: { screen: RegisterComplete, navigationOptions:defaultNavOptions },
 }
 
 export const AuthStacks = Object.keys(Stacks).reduce((acc, cur) => {

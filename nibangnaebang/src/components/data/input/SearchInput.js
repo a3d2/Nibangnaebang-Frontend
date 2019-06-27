@@ -20,9 +20,7 @@ class SearchInput extends Component {
         const { needBottomBorder, placeholder, onSearchInputChange, onSearch } = this.props;
 
         return (
-            <InputContainer
-                bottomBorder={needBottomBorder}
-            >
+            <InputContainer>
                 <SearchIcon source={assets.iconSearch}/>
                 <TextInput
                     placeholder={placeholder}
@@ -41,25 +39,25 @@ SearchInput.propTypes = {
     placeholder:PropTypes.string.isRequired,
     onSearchInputChange:PropTypes.func,
     onSearch:PropTypes.func.isRequired,
-    needBottomBorder:PropTypes.bool,
 };
 
 SearchInput.defaultProps = {
     placeholder:'',
-    needBottomBorder:true
 }
 
 const InputContainer = styled.View`
-    padding-bottom:${Platform.OS === 'ios' ? 14.5 : 0};
-    border-bottom-width:${props => props.bottomBorder ? 1 : 0};
-    border-bottom-color:${colors.veryLightBlue};
+    /* padding-bottom:${Platform.OS === 'ios' ? 9 : 0}; */
+    padding-vertical:9px;
+    padding-horizontal:12px;
+    background-color:${colors.paleGrey};
+    border-radius:8;
     flex-direction:row;
     align-items:center;
 `;
 
 const SearchIcon = styled.Image`
-    width:14;
-    height:14;
+    width:16;
+    height:16;
     margin-right:8;
 `;
 

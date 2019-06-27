@@ -2,8 +2,11 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { inject } from 'mobx-react';
 import TabNavigator from "../navigators/TabNavigator";
+import AuthNavigator from "./Auth/index";
 
 @inject(stores => ({
+    spinning:stores.spinner.spinning,
+    user:stores.auth.user
 }))
 class Splash extends React.Component {
     backCounter = 0;
@@ -22,15 +25,24 @@ class Splash extends React.Component {
 
     render() {
         // A. navigate to tab if logged in
+        const { spinning, user } = this.props;
         
-        if(true) {   //TODO to login
+        if(user.id) {
             return(
                 <NavigatorContainer>
                     <TabNavigator/>
                 </NavigatorContainer>
             )
         }
+
         // B. display login page if user needs login
+        if(true) {   //TODO to login
+            return(
+                <NavigatorContainer>
+                    <AuthNavigator/>
+                </NavigatorContainer>
+            )
+        }
 
         return (
             <Container>

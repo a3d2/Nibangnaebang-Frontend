@@ -21,7 +21,7 @@ class Modal extends Component {
                     borderRadius: 20,
                     width:'70%'
                 }}
-                overlayBackgroundColor={colors.dark}
+                // overlayBackgroundColor={colors.dark}
                 overlayOpacity={0.95}
                 // onHardwareBackPress={onRequestClose}
             >

@@ -51,12 +51,12 @@ BackButton.defaultProps = {
 
 const Container = styled.TouchableOpacity`
     padding-right:60;
-    padding-left:17;
-    padding-vertical:15;
+    padding-left:18;
+    padding-vertical:14;
 `;
 const Image = styled.Image`
-    width:21;
-    height:21;
+    width:16;
+    height:16;
 `;
 
 export default BackButton;

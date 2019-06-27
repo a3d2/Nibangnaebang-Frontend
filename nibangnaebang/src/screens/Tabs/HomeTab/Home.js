@@ -1,10 +1,13 @@
 import React from 'react';
 import { inject } from 'mobx-react';
 import styled from 'styled-components/native';
+import RoomList from './Room/RoomList';
 
 @inject(stores => ({
     setNav:stores.nav.setNav,
-    navTo:stores.nav.navTo
+    navTo:stores.nav.navTo,
+    spin:stores.spinner.spin,
+    rooms:stores.room.rooms
 }))
 class Home extends React.Component {
     constructor(props) {
@@ -14,36 +17,25 @@ class Home extends React.Component {
         }
     }
     componentDidMount() {
-        const { navigation, setNav } = this.props;
-        setNav(navigation);
+        this.props.setNav(this.props.navigation);
     }
-
-    navToRoomDetail = () => {
-        const { navTo } = this.props;
-        navTo('RoomDeatil');
-    }
+    
 
     render() {
-        const { 
-        } = this.state;
+        const { rooms } = this.props;
 
         return (
             <Container>
-                <Button onPress={this.navToRoomDetail}>
-                    <Text>
-                        nav
-                    </Text>
-                </Button>
+                <RoomList
+                    rooms={rooms}
+                />
             </Container>
         );
     }
 }
 
-const Container = styled.ScrollView`
-`;
-const Text = styled.Text`
-`;
-const Button = styled.TouchableOpacity`
+const Container = styled.View`
+    flex:1;
 `;
 
 export default Home;

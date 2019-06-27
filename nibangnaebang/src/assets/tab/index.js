@@ -1,10 +1,15 @@
 const tabAssets = {
 	home: require('./iconTabHome.png'),
-	weekly: require('./iconTabWeekly.png'),
-	monthly: require('./iconTabMonthly.png'),
-	theme: require('./iconTabMonthly.png'),
-	charge: require('./iconTabCharge.png'),
-	settings: require('./iconTabSettings.png'),
+	homeGrey: require('./iconTabHomeGrey.png'),
+
+	upload: require('./iconTabUpload.png'),
+	uploadGrey: require('./iconTabUploadGrey.png'),
+
+	message: require('./iconTabMessage.png'),
+	messageGrey: require('./iconTabMessageGrey.png'),
+
+	mypage: require('./iconTabMyPage.png'),
+	mypageGrey: require('./iconTabMyPageGrey.png'),
 };
 
 export default tabAssets

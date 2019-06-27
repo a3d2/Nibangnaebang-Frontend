@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 import colors from '../../../colors/colors';
 import TextInput, { InputType } from './TextInput';
-import assets from "@assets/general";
 
 const MARGIN_GAP = 10;
 
@@ -30,6 +29,10 @@ class Input extends Component {
         onSubmitEditing && onSubmitEditing(value)
     }
 
+    setValue = (value) => {
+        this.inputRef.setValue(value)
+    }
+
     render() {
         const {
             containerStyle,
@@ -38,7 +41,6 @@ class Input extends Component {
             inputStyle,
             accessoryView,
             removeUnderline,
-            errorMessage
         } = this.props;
 
         const { showPassword, accWidth } = this.state;
@@ -54,6 +56,7 @@ class Input extends Component {
                     style={containerStyle}
                 >
                     <TextInput
+                        ref={ref => { this.inputRef = ref; }}
                         {...this.props}
                         style={inputStyle}
                         {...type}
@@ -61,16 +64,6 @@ class Input extends Component {
                         secureTextEntry={!showPassword && isPassword}
                         onSubmitEditing={this.onSubmitEditing}
                     />
-                    {isPassword && 
-                        <VisibilityButton
-                            removeUnderline={removeUnderline}
-                            onPress={this.toggleShowPassword}
-                        >
-                            <EyeIcon
-                                source={showPassword ? assets.iconViewPink : assets.iconViewGray}
-                            />
-                        </VisibilityButton>
-                    }
                     <AccessoryContainer
                         onLayout={(e) => {
                             const { width } = e.nativeEvent.layout;
@@ -81,13 +74,6 @@ class Input extends Component {
                         {accessoryView}
                     </AccessoryContainer>
                 </InnerContainer>
-                {!!errorMessage &&
-                    <ErrorContainer>
-                        <ErrorText>
-                            {errorMessage}
-                        </ErrorText>
-                    </ErrorContainer>
-                }
             </Container>
         );
     }
@@ -105,7 +91,6 @@ Input.propTypes = {
     accessoryView:PropTypes.element,
     accessoryWidth:PropTypes.number,
     removeUnderline:PropTypes.bool,
-    errorMessage:PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -117,7 +102,6 @@ Input.defaultProps = {
     returnKeyType:'done',
     blurOnSubmit:false,
     removeUnderline:false,
-    errorMessage:''
 }
 
 const Container = styled.View`
@@ -127,38 +111,14 @@ const InnerContainer = styled.View`
     display: flex;
     flex-direction:row;
     width:100%;
-    margin-top:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
-    padding-bottom:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
+    /* margin-top:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0}; */
+    padding-bottom:${props => props.underline ? Platform.OS === 'ios' ? 7 : 0 : 0};
     border-bottom-width:${props => props.underline ? 1 : 0};
-    border-bottom-color:${colors.veryLightBlue};
+    border-bottom-color:${colors.lightPeriwinkle};
     padding-right:${props => props.paddingRight};
 `;
 
-const VisibilityButton = styled.TouchableOpacity`
-    position:absolute;
-    top: ${Platform.OS === "ios" ? 0 : 15};
-    right: 0;
-    bottom: 0;
-    justify-content:center;
-    align-items:center;
-    padding:5px;
-    padding-right:0px;
-`;
-const EyeIcon = styled.Image`
-    width:17; height:17;
-`;
-
 const AccessoryContainer = styled.View`
-`;
-
-const ErrorContainer = styled.View`
-    margin-top:9.5;
-`;
-
-const ErrorText = styled.Text`
-    color:${colors.softBlue};
-    font-size:12;
-
 `;
 
 export default Input;

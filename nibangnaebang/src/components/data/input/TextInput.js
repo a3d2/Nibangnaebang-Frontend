@@ -50,6 +50,10 @@ class TextInput extends Component {
         onSubmitEditing && onSubmitEditing(value)
     }
 
+    setValue = (value) => {
+        this.setState({ value:value });
+    }
+
     render() {
         const {
             ref,
@@ -57,8 +61,8 @@ class TextInput extends Component {
             type,
         } = this.props;
 
-        const { value } = this.state;
-
+        let { value } = this.state;
+        value = (value || '').toString();
 
         return (
             <Input
@@ -74,15 +78,15 @@ class TextInput extends Component {
                 onChangeText={this.onChangeText}
                 onSubmitEditing={this.onSubmitEditing}
                 value={value}
-                placeholderTextColor={colors.cloudyBlue}
-                selectionColor={colors.slateGrey}
+                placeholderTextColor={colors.blueyGrey}
+                // selectionColor={colors.slateGrey}
             />
         );
     }
 }
 
 const Input = styled.TextInput`
-    color:${colors.slateGrey};
+    color:${colors.darkGrey};
     font-size:14;
     width:100%;
 `;
