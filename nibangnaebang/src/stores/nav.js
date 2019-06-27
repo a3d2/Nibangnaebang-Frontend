@@ -26,6 +26,5 @@ class NavigationStore {
   
   @action back = () => 
     this.navigator.dispatch(NavigationActions.back())
-
 }
 export default new NavigationStore();

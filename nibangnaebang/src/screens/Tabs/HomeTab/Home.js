@@ -3,6 +3,7 @@ import { inject } from 'mobx-react';
 import styled from 'styled-components/native';
 
 @inject(stores => ({
+    spin:stores.spinner.spin
 }))
 class Home extends React.Component {
     constructor(props) {
@@ -18,9 +19,15 @@ class Home extends React.Component {
 
         return (
             <Container>
-                <Text>
-                    home
-                </Text>
+                <Button
+                    onPress={() => {
+                        this.props.spin();
+                    }}
+                >
+                    <Text>
+                        spin
+                    </Text>
+                </Button>
             </Container>
         );
     }
@@ -28,7 +35,12 @@ class Home extends React.Component {
 
 const Container = styled.ScrollView`
 `;
-const Text = styled.Text`
+const Button = styled.TouchableOpacity`
 `;
+const Text = styled.Text`
+    color:red;
+`;
+const a = styled.View`
+`
 
 export default Home;

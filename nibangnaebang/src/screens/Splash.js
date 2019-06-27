@@ -4,6 +4,7 @@ import { inject } from 'mobx-react';
 import TabNavigator from "../navigators/TabNavigator";
 
 @inject(stores => ({
+    spinning:stores.spinner.spinning
 }))
 class Splash extends React.Component {
     backCounter = 0;
@@ -22,6 +23,8 @@ class Splash extends React.Component {
 
     render() {
         // A. navigate to tab if logged in
+        const { spinning } = this.props;
+        console.log("TCL: Splash -> render -> spinning", spinning)
         
         if(true) {   //TODO to login
             return(
