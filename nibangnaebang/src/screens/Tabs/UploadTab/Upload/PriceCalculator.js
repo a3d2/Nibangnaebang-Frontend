@@ -5,6 +5,13 @@ import styled from 'styled-components/native';
 import Input from '../../../../components/data/input/Input';
 import NormalButton from '../../../../components/feedback/button/NormalButton';
 import colors from '../../../../colors/colors';
+import { numberWithCommas } from '../../../../utils/utils';
+
+const RoomType = {
+    month:'month',
+    mine:'mine',
+    year:'year',
+}
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
@@ -15,18 +22,66 @@ class PriceCalculator extends React.Component {
         super(props);
 
         this.state = {
-            calcPrice:1234
+            roomType:'',
+            price:0,
+            calcPrice:0
         }
     }
 
     onConfirm = () => {
         const { back, navigation } = this.props;
         const { calcPrice } = this.state;
-        back();
-        navigation.state.params.onCalculateConfirm(calcPrice);
+        if(calcPrice) {
+            back();
+            navigation.state.params.onCalculateConfirm(calcPrice);
+        }
+    }
+
+    onSelectMonth = () => {
+        this.setState({ roomType:RoomType.month })
+    }
+    onSelectMine = () => {
+        this.setState({ roomType:RoomType.mine })
+    }
+    onSelectYear = () => {
+        this.setState({ roomType:RoomType.year })
+    }
+    onPriceChange = (price) => {
+        this.setState({ price:price }, this.calcuate)
+    }
+
+    calcuate = () => {
+        const { roomType, price } = this.state;
+
+        let result = price / 30;
+        if(roomType === RoomType.year)  {
+            result = price / 360;
+        } else if(roomType === RoomType.mine) {
+            result = price * 5 / 100 / 12 / 30;
+        }
+
+        this.setState({ calcPrice:Math.floor(result) });
+    }
+
+    get calculatable () {
+        const { roomType, price } = this.state;
+
+        if(roomType && price) return true;
+        return false;
     }
     
     render() {
+        const { roomType, price, calcPrice } = this.state
+
+        const calculatable = this.calculatable;
+
+        let equationText = `${price} ÷ 30`;
+        if(roomType === RoomType.year)  {
+            equationText = `${price} ÷ 360`;
+        } else if(roomType === RoomType.mine) {
+            equationText = `(${price} * 5% ÷ 12) ÷ 30`;
+        }
+
         return (
             <Container
                 contentContainerStyle={{
@@ -40,18 +95,33 @@ class PriceCalculator extends React.Component {
                         방 종류
                     </Title>
                     <TypeButtonsContainer>
-                        <TypeButtonContainer>
-                            <TypeButtonText>
+                        <TypeButtonContainer
+                            onPress={this.onSelectMonth}
+                            selected={roomType === RoomType.month}
+                        >
+                            <TypeButtonText
+                                selected={roomType === RoomType.month}
+                            >
                                 월세
                             </TypeButtonText>
                         </TypeButtonContainer>
-                        <TypeButtonContainer>
-                            <TypeButtonText>
+                        <TypeButtonContainer
+                            onPress={this.onSelectMine}
+                            selected={roomType === RoomType.mine}
+                        >
+                            <TypeButtonText
+                                selected={roomType === RoomType.mine}
+                            >
                                 전세
                             </TypeButtonText>
                         </TypeButtonContainer>
-                        <TypeButtonContainer>
-                            <TypeButtonText>
+                        <TypeButtonContainer
+                            onPress={this.onSelectYear}
+                            selected={roomType === RoomType.year}
+                        >
+                            <TypeButtonText
+                                selected={roomType === RoomType.year}
+                            >
                                 연세
                             </TypeButtonText>
                         </TypeButtonContainer>
@@ -68,31 +138,38 @@ class PriceCalculator extends React.Component {
                             marginTop:20,
                             fontSize:24
                         }}
+                        onChangeText={this.onPriceChange}
                     />
                 </PriceContainer>
-                <CalcButton>
-                    <CalcButtonText>
+                <CalcButton
+                    disabled={!calculatable}
+                >
+                    <CalcButtonText
+                        disabled={!calculatable}
+                    >
                         1일 거주비 계산하기
                     </CalcButtonText>
                 </CalcButton>
-                <ResultContainer>
-                    <ResultInfoText>
-                        1일 예상 거주비
-                    </ResultInfoText>
-                    <ResultRightContainer>
-                        <ResultEquationText>
-                            x % y
-                        </ResultEquationText>
-                        <ResultText>
-                            = z 원
-                        </ResultText>
-                    </ResultRightContainer>
-                </ResultContainer>
+                {calculatable &&
+                    <ResultContainer>
+                        <ResultInfoText>
+                            1일 예상 거주비
+                        </ResultInfoText>
+                        <ResultRightContainer>
+                            <ResultEquationText>
+                                {equationText}
+                            </ResultEquationText>
+                            <ResultText>
+                                {`= ${numberWithCommas(calcPrice)} 원`}
+                            </ResultText>
+                        </ResultRightContainer>
+                    </ResultContainer>
+                }
                 <ConfirmButtonContainer>
                     <NormalButton
                         disabled={false}
                         onPress={this.onConfirm}
-                        label={'1일 z원으로 계산하기'}
+                        label={`1일 ${calcPrice}원으로 계산하기`}
                     />
                 </ConfirmButtonContainer>
             </Container>
@@ -166,13 +243,13 @@ const CalcButton = styled.TouchableOpacity`
     border-radius:4;
     border-width:1;
     padding-vertical:11;
-    border-color:${colors.darkGrey};
+    border-color:${props => props.disabled ? colors.blueyGrey : colors.darkGrey};
 `;
 const CalcButtonText = styled.Text`
     font-size:15;
     line-height:22;
     letter-spacing:-0.3;
-    color:${colors.darkGrey};
+    color:${props => props.disabled ? colors.blueyGrey : colors.darkGrey};
 `;
 
 const ResultContainer = styled.View`
@@ -187,6 +264,7 @@ const ResultInfoText = styled.Text`
     color:${colors.blueyGrey};
 `;
 const ResultRightContainer = styled.View`
+    align-items:flex-end;
 `;
 const ResultEquationText = styled.Text`
     font-size:17;

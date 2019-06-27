@@ -24,7 +24,6 @@ class UploadStepPeriod extends React.Component {
     }
     
     onCalculateConfirm = (price) => {
-        console.log("TCL: UploadStepPeriod -> onCalculateConfirm -> price", price)
     }
 
     onPressNext = () => {
