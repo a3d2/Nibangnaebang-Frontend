@@ -4,11 +4,17 @@ import { createStackNavigator } from "react-navigation";
 import { StackNavOptions } from '../../../constants/styles';
 import MyRoom from './MyRoom';
 import PickedRoom from './PickedRoom';
+import BackButton from "../../../components/feedback/button/BackButton";
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
 
     switch (routeName) {
+        default:
+            return {
+                headerBackImage:<BackButton/>,
+                headerBackTitle: null
+            };
     }
 };
 

@@ -4,11 +4,17 @@ import { StackNavOptions } from '../../../constants/styles';
 import PriceCalculator from './Upload/PriceCalculator';
 import UploadStepPeriod from './Upload/UploadStepPeriod';
 import UploadStepDesc from './Upload/UploadStepDesc';
+import BackButton from "../../../components/feedback/button/BackButton";
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
 
     switch (routeName) {
+        default:
+            return {
+                headerBackImage:<BackButton/>,
+                headerBackTitle: null
+            };
     }
 };
 

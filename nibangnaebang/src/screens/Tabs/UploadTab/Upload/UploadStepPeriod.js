@@ -53,18 +53,26 @@ class UploadStepPeriod extends React.Component {
     
     render() {
         return (
-            <Container>
+            <Container
+                contentContainerStyle={{
+                    flexGrow: 1, 
+                    flexDirection: 'column', 
+                    justifyContent: 'space-between'
+                }}
+            >
                 <FilterView
                     periodTitle={`거주기간`}
                     priceTitle={`가격`}
                     genderTitle={`성별`}
                     onPressCalcButton={this.onPressCalcButton}
                 />
-                <NormalButton
-                    disabled={false}
-                    onPress={this.onPressNext}
-                    label={'다음'}
-                />
+                <ConfirmButtonContainer>
+                    <NormalButton
+                        disabled={false}
+                        onPress={this.onPressNext}
+                        label={'다음'}
+                    />
+                </ConfirmButtonContainer>
             </Container>
         );
     }
@@ -83,6 +91,12 @@ const Container = styled.ScrollView`
 const PriceCalcButtonContainer = styled.TouchableOpacity`
 `;
 const PriceCalcButtonText = styled.Text`
+`;
+
+const ConfirmButtonContainer = styled.View`
+    flex: 1;
+    justify-content: flex-end;
+    margin-bottom:20;
 `;
 
 export default UploadStepPeriod;

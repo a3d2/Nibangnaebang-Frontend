@@ -211,7 +211,6 @@ const CalcIcon = styled.Image`
 
 const GenderContainer = styled.View`
     margin-top:32;
-    margin-bottom:109;
 `;
 
 const GenderInnerContainer = styled.View`
