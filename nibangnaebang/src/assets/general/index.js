@@ -5,6 +5,7 @@ const assets = {
     iconFilter: require('./iconFilter.png'),
     iconMap: require('./iconMap.png'),
     iconCalculator: require('./iconCalculator.png'),
+    iconFace: require('./iconFace.png'),
     
     iconClose: require('./iconClose.png'),
     iconAddImage: require('./iconAddImage.png'),

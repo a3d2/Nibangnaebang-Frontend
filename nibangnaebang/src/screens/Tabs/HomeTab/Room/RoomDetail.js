@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 import Banner from '../../../../components/view/banner/Banner';
 import faker from 'faker';
 import NormalButton from '../../../../components/feedback/button/NormalButton';
+import assets from '../../../../assets/general';
+import colors from '../../../../colors/colors';
 
 export const RoomStatus = {
     onSale:'연락하기',
@@ -42,7 +44,7 @@ class RoomDetail extends React.Component {
                     <ProfileImageContainer>
                         <ProfileImage
                             // source={{ uri:user.image }}
-                            source={{ uri:faker.image.avatar() }}
+                            source={assets.iconFace}
                         />
                     </ProfileImageContainer>
                     <ProfileInfoContainer>
@@ -55,20 +57,29 @@ class RoomDetail extends React.Component {
                         </ProfileSchoolText>
                     </ProfileInfoContainer>
                     <MapButton>
-                        
+                        <MapIcon source={assets.iconMap}/>
                     </MapButton>
                 </ProfileContainer>
+                
                 <DescContainer>
-                    <Title>
-                        {data.title}
-                    </Title>
-                    <Location>
+                        <Title>
+                            {data.title}
+                        </Title>
+                        <Location>
 
-                    </Location>
+                        </Location>
+                    
+                    <Divider>
+                    </Divider>
+                    
+                    
                     <Description>
                         {data.desc}
                     </Description>
                 </DescContainer>
+                <Divider>
+
+                </Divider>
                 <BottomButtonContainer>
                     <NormalButton
                         onPress={this.onPressButton}
@@ -81,42 +92,61 @@ class RoomDetail extends React.Component {
 }
 
 const Container = styled.ScrollView`
+    flex:1;
 `;
 
 const ProfileContainer = styled.View`
     flex-direction:row;
     position:relative;
+    align-items:center;
+    padding-horizontal:20;
+    padding-vertical:20;
 `;
 const ProfileImageContainer = styled.View`
 `;
 const ProfileImage = styled.Image`
-    width:50;
-    height:50;
+    width:36;
+    height:36;
 `;
 const ProfileInfoContainer = styled.View`
 `;
 const ProfileNameText = styled.Text`
+    padding-horizontal:12;
 `;
 const ProfileSchoolText = styled.Text`
+    padding-horizontal:12;
 `;
 const MapButton = styled.TouchableOpacity`
-    right:0;
+    right:20;
     position:absolute;
-    width:20;
-    height:20;
-    background-color:red;
 `;
 
 const DescContainer= styled.View`
+    padding-horizontal:20;
+    padding-bottom:60;
 `;
 const Title = styled.Text`
 `;
 const Location = styled.Text`
 `;
 const Description = styled.Text`
+    padding-top:16;
 `;
 
 const BottomButtonContainer = styled.View`
+    padding-horizontal:20;
+    padding-vertical:12;
+`;
+
+const MapIcon = styled.Image`
+    width:16;
+    height:17;
+`;
+
+const Divider = styled.View`
+    height:1;
+    width:100%;
+    background-color:${colors.paleGrey};
 `;
 
 export default RoomDetail;
