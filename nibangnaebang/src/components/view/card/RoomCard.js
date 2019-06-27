@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 
-class Card extends Component {
+class RoomCard extends Component {
     constructor(props) {
         super(props);
 
@@ -44,12 +44,12 @@ class Card extends Component {
     }
 };
 
-Card.propTypes = {
+RoomCard.propTypes = {
     data:PropTypes.object.isRequired,
     onPressItem:PropTypes.func,
 };
 
-Card.defaultProps = {
+RoomCard.defaultProps = {
 }
 
 const Container = styled.TouchableOpacity`
@@ -84,4 +84,4 @@ const Period = styled.Text`
 const Price = styled.Text`
 `;
 
-export default Card;
+export default RoomCard;

@@ -1,7 +1,8 @@
 import React from 'react'
-import Message from './Message';
 import { createStackNavigator } from "react-navigation";
 import { StackNavOptions } from '../../../constants/styles';
+import Message from './Message/Message';
+import MessageDetail from './Message/MessageDetail';
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
@@ -12,6 +13,7 @@ const defaultNavOptions = ({ navigation }) => {
 
 let Stacks = {
     Message: { screen: Message, navigationOptions:defaultNavOptions },
+    MessageDetail: { screen: MessageDetail, navigationOptions:defaultNavOptions },
 }
 
 export const MessageStacks = Object.keys(Stacks).reduce((acc, cur) => {

@@ -33,9 +33,9 @@ const defaultNavOptions = ({ navigation }) => {
 
 let Tabs = {
     Home: { screen: Tab.HomeTab, navigationOptions:defaultNavOptions },
+    Upload: { screen: Tab.UploadTab, navigationOptions:defaultNavOptions },
     Message: { screen: Tab.MessageTab, navigationOptions:defaultNavOptions },
     MyPage: { screen: Tab.MyPageTab, navigationOptions:defaultNavOptions },
-    Upload: { screen: Tab.UploadTab, navigationOptions:defaultNavOptions },
 }
 
 export const TabsConfig = Object.keys(Tabs).reduce((acc, cur) => {
@@ -44,7 +44,7 @@ export const TabsConfig = Object.keys(Tabs).reduce((acc, cur) => {
 }, {});
 
 const TabNavigator = createBottomTabNavigator(Tabs, {
-    initialRouteName: TabsConfig.Home,
+    initialRouteName: TabsConfig.Upload,
     lazy: false,
 });
 

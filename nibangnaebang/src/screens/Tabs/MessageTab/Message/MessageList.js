@@ -3,11 +3,12 @@ import { inject } from 'mobx-react';
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 import RoomCard from '../../../../components/view/card/RoomCard';
+import MessageListItem from './MessageListItem';
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
 }))
-class RoomList extends React.Component {
+class MessageList extends React.Component {
     constructor(props) {
         super(props);
 
@@ -17,18 +18,18 @@ class RoomList extends React.Component {
     
     onPressItem = (item) => {
         const { navTo } = this.props;
-        navTo('RoomDetail', item);
+        navTo('MessageDetail', item);
     }
 
     render() {
-        const { rooms } = this.props;
-        if(!rooms) return;
+        const { messagesList } = this.props;
+        if(!messagesList) return;
 
-        const roomsView = rooms.map((each) => {
+        const messagesView = messagesList.map((each) => {
             return (
-                <RoomCard 
+                <MessageListItem 
                     key={each.id}
-                    data={each}
+                    preview={each.message}
                     onPressItem={this.onPressItem.bind(this, each)}
                 />
             )
@@ -36,19 +37,19 @@ class RoomList extends React.Component {
 
         return (
             <Container>
-                {roomsView}
+                {messagesView}
             </Container>
         );
     }
 }
-RoomList.propTypes = {
+MessageList.propTypes = {
 };
 
-RoomList.defaultProps = {
+MessageList.defaultProps = {
 }
 
 const Container = styled.ScrollView`
     flex:1;
 `;
 
-export default RoomList;
+export default MessageList;

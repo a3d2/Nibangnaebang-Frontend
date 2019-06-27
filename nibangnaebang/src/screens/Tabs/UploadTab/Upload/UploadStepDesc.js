@@ -1,34 +1,34 @@
 import React from 'react';
 import { inject } from 'mobx-react';
+import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 
 @inject(stores => ({
+    navTo:stores.nav.navTo,
 }))
-class Upload extends React.Component {
+class UploadStepDesc extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
         }
     }
-
+    
     render() {
-        const { 
-        } = this.state;
-
         return (
             <Container>
-                <Text>
-                    Upload
-                </Text>
             </Container>
         );
     }
 }
+UploadStepDesc.propTypes = {
+};
+
+UploadStepDesc.defaultProps = {
+}
 
 const Container = styled.ScrollView`
-`;
-const Text = styled.Text`
+    flex:1;
 `;
 
-export default Upload;
+export default UploadStepDesc;
