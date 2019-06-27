@@ -52,7 +52,7 @@ SearchInput.defaultProps = {
 const InputContainer = styled.View`
     padding-bottom:${Platform.OS === 'ios' ? 14.5 : 0};
     border-bottom-width:${props => props.bottomBorder ? 1 : 0};
-    border-bottom-color:${colors.veryLightBlue};
+    border-bottom-color:${colors.lightPeriwinkle};
     flex-direction:row;
     align-items:center;
 `;

@@ -25,7 +25,7 @@ class RoomCard extends Component {
                 >
                     <LeftContainer>
                         <Image
-                            source={{ uir:data.image }}
+                            source={{ uri:data.images[0] }}
                         />
                     </LeftContainer>
                     <RightContainer>

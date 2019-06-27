@@ -20,7 +20,7 @@ class NormalButton extends Component {
             <Container 
                 onPress={onPress}
                 disabled={disabled}
-                bgColor={disabled ? colors.periwinkleGray : colors.mainPink}
+                bgColor={disabled ? colors.lightPeriwinkle : colors.mainBlue}
                 style={{
                     ...containerStyle
                 }}
@@ -67,7 +67,7 @@ const Container = styled.TouchableOpacity`
 const ButtonText = styled.Text`
     flex:1;
     text-align:center;
-    color:${props => props.wired ? colors.cloudyBlue : 'white'};
+    color:white;
 `;
 
 export default NormalButton;

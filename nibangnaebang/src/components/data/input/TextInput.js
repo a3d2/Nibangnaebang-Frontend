@@ -74,15 +74,15 @@ class TextInput extends Component {
                 onChangeText={this.onChangeText}
                 onSubmitEditing={this.onSubmitEditing}
                 value={value}
-                placeholderTextColor={colors.cloudyBlue}
-                selectionColor={colors.slateGrey}
+                placeholderTextColor={colors.blueyGrey}
+                // selectionColor={colors.slateGrey}
             />
         );
     }
 }
 
 const Input = styled.TextInput`
-    color:${colors.slateGrey};
+    color:${colors.darkGrey};
     font-size:14;
     width:100%;
 `;

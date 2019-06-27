@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
 import { Modal } from 'react-native';
 import colors from '../../../colors/colors';
-import { changeOpacity } from '../../../utils/utils';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 class DrawerModal extends Component {
@@ -55,7 +54,6 @@ const Container = styled.TouchableWithoutFeedback`
 `;
 
 const InnerContainer = styled.View`
-    background-color:${changeOpacity(colors.dark, 0.95)};
     flex:1;
     display:flex;
     justify-content:flex-end;

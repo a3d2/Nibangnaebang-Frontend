@@ -36,7 +36,6 @@ class UploadStepDesc extends React.Component {
         const { images, cautionChecked } = this.state;
 
         const roomImages = images.map((each, idx) => {
-            console.log("TCL: UploadStepDesc -> render -> each", each)
             return (
                 <RoomImageContainer key={idx}>
                     <RoomImage source={{

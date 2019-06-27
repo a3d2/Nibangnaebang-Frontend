@@ -81,13 +81,6 @@ class Input extends Component {
                         {accessoryView}
                     </AccessoryContainer>
                 </InnerContainer>
-                {!!errorMessage &&
-                    <ErrorContainer>
-                        <ErrorText>
-                            {errorMessage}
-                        </ErrorText>
-                    </ErrorContainer>
-                }
             </Container>
         );
     }
@@ -105,7 +98,6 @@ Input.propTypes = {
     accessoryView:PropTypes.element,
     accessoryWidth:PropTypes.number,
     removeUnderline:PropTypes.bool,
-    errorMessage:PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -117,7 +109,6 @@ Input.defaultProps = {
     returnKeyType:'done',
     blurOnSubmit:false,
     removeUnderline:false,
-    errorMessage:''
 }
 
 const Container = styled.View`
@@ -130,7 +121,7 @@ const InnerContainer = styled.View`
     margin-top:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
     padding-bottom:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
     border-bottom-width:${props => props.underline ? 1 : 0};
-    border-bottom-color:${colors.veryLightBlue};
+    border-bottom-color:${colors.lightPeriwinkle};
     padding-right:${props => props.paddingRight};
 `;
 
@@ -149,16 +140,6 @@ const EyeIcon = styled.Image`
 `;
 
 const AccessoryContainer = styled.View`
-`;
-
-const ErrorContainer = styled.View`
-    margin-top:9.5;
-`;
-
-const ErrorText = styled.Text`
-    color:${colors.softBlue};
-    font-size:12;
-
 `;
 
 export default Input;
