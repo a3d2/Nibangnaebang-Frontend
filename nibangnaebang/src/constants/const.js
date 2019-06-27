@@ -10,3 +10,11 @@ export const IMAGE_URI =
     'http://alldpublic.kr/NibangNaebangAPI/Images'
     :
     'http://alldpublic.kr/NibangNaebangAPI/Images';
+
+
+export const TabName = {
+  'Home':'메인',
+  'Upload':'방올리기',
+  'Message':'쪽지함',
+  'MyPage':'마이페이지',
+}

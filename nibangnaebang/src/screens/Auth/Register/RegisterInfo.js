@@ -6,6 +6,8 @@ import Input from '../../../components/data/input/Input';
 import { InputType } from '../../../components/data/input/TextInput';
 import NormalButton from '../../../components/feedback/button/NormalButton';
 import BackButton from '../../../components/feedback/button/BackButton';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 
 @inject(stores => ({
@@ -17,7 +19,8 @@ class RegisterInfo extends React.Component {
 
         this.state = {
             id:'',
-            password:''
+            password:'',
+            school:'',
         }
     }
 
@@ -27,17 +30,28 @@ class RegisterInfo extends React.Component {
     onPasswordChange = (value) => {
         this.setState({ password:value });
     }
+    onSchoolChange = (value) => {
+        this.setState({ school:value });
+    }
 
     onPressNext = () => {
         const { navTo } = this.props;
-        navTo('RegisterAuth');
+        navTo('RegisterAuth', this.state);
     }
 
     render() {
         const { id, password } = this.state;
         
         return (
-            <Container>
+            <KeyboardAwareScrollView
+                extraScrollHeight={150}
+                enableOnAndroid={true}
+                contentContainerStyle={{
+                    flex:1,
+                    paddingHorizontal:20,
+                    paddingTop:getStatusBarHeight()
+                }}
+            >
                 <BackButton>
                 </BackButton>
                 <Title>
@@ -63,9 +77,23 @@ class RegisterInfo extends React.Component {
                     inputStyle={{
                         marginTop:64
                     }}
-                    onSubmitEditing={this.onPressNext}
+                    onSubmitEditing={() => {
+                        this.schoolRef.focus();
+                    }}
                     onChangeText={this.onPasswordChange}
                 />
+
+                <Input
+                    inputRef={ref => { this.schoolRef = ref; }}
+                    placeholder={'학교'}
+                    returnKeyType={'next'}
+                    inputStyle={{
+                        marginTop:64
+                    }}
+                    onSubmitEditing={this.onPressNext}
+                    onChangeText={this.onSchoolChange}
+                />
+
                 <NormalButton
                     onPress={this.onPressNext}
                     containerStyle={{
@@ -74,7 +102,7 @@ class RegisterInfo extends React.Component {
                     label={'다음'}
                     disabled={!(id && password)}
                 />
-            </Container>
+            </KeyboardAwareScrollView>
         );
     }
 }
@@ -85,8 +113,6 @@ RegisterInfo.defaultProps = {
 }
 
 const Container = styled.ScrollView`
-    flex:1;
-    padding-horizontal:20;
 `;
 const Title = styled.Text`
     padding-top:16;

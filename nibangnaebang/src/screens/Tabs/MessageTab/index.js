@@ -11,6 +11,7 @@ const defaultNavOptions = ({ navigation }) => {
     switch (routeName) {
         default:
             return {
+                title:'쪽지함',
                 headerBackImage:<BackButton/>,
                 headerBackTitle: null
             };
