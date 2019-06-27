@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/native';
+import NormalButton from '../../feedback/button/NormalButton';
 
 class RoomCard extends Component {
     constructor(props) {
@@ -13,32 +14,41 @@ class RoomCard extends Component {
     }
 
     render() {
-        const { data, onPressItem } = this.props;
+        const { data, onPressItem, owner, onPressConfirm } = this.props;
         if(!data) return null;
 
         return (
             <Container
-                onPress={onPressItem}
             >
-                <LeftContainer>
-                    <Image
-                        source={{ uir:data.image }}
+                <InnerContainer
+                    onPress={onPressItem}
+                >
+                    <LeftContainer>
+                        <Image
+                            source={{ uir:data.image }}
+                        />
+                    </LeftContainer>
+                    <RightContainer>
+                        <SchoolName>
+                            {data.school}
+                        </SchoolName>
+                        <Title>
+                            {data.title}
+                        </Title>
+                        <Period>
+                            {data.period}
+                        </Period>
+                        <Price>
+                            {data.price}
+                        </Price>
+                    </RightContainer>
+                </InnerContainer>
+                {owner && 
+                    <NormalButton
+                        onPress={onPressConfirm}
+                        label={'거래 완료'}
                     />
-                </LeftContainer>
-                <RightContainer>
-                    <SchoolName>
-                        {data.school}
-                    </SchoolName>
-                    <Title>
-                        {data.title}
-                    </Title>
-                    <Period>
-                        {data.period}
-                    </Period>
-                    <Price>
-                        {data.price}
-                    </Price>
-                </RightContainer>
+                }
             </Container>
         );
     }
@@ -47,14 +57,19 @@ class RoomCard extends Component {
 RoomCard.propTypes = {
     data:PropTypes.object.isRequired,
     onPressItem:PropTypes.func,
+    onPressConfirm:PropTypes.func,
+    owner:PropTypes.bool,
 };
 
 RoomCard.defaultProps = {
+    owner:false
 }
 
 const Container = styled.TouchableOpacity`
-    padding:20px;
     margin-bottom:20;
+`;
+const InnerContainer = styled.TouchableOpacity`
+    padding:20px;
     border-bottom-width:1px;
     border-bottom-color:black;
     flex-direction:row;

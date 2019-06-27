@@ -1,9 +1,9 @@
 import { observable, action } from "mobx";
 import faker from 'faker';
 
-class RoomStore {
+class UserStore {
     @observable users = {
 
     };
 }
-export default new RoomStore();
+export default new UserStore();

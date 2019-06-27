@@ -2,6 +2,8 @@ import React from 'react'
 import MyPage from './MyPage';
 import { createStackNavigator } from "react-navigation";
 import { StackNavOptions } from '../../../constants/styles';
+import MyRoom from './MyRoom';
+import PickedRoom from './PickedRoom';
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
@@ -12,6 +14,8 @@ const defaultNavOptions = ({ navigation }) => {
 
 let Stacks = {
     MyPage: { screen: MyPage, navigationOptions:defaultNavOptions },
+    MyRoom: { screen: MyRoom, navigationOptions:defaultNavOptions },
+    PickedRoom: { screen: PickedRoom, navigationOptions:defaultNavOptions },
 }
 
 export const MyPageStacks = Object.keys(Stacks).reduce((acc, cur) => {
