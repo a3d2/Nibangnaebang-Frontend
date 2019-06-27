@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import Card from '../../../../components/view/card/Card';
 
 @inject(stores => ({
+    navTo:stores.nav.navTo,
 }))
 class RoomList extends React.Component {
     constructor(props) {
@@ -13,7 +14,10 @@ class RoomList extends React.Component {
         this.state = {
         }
     }
-    componentDidMount() {
+    
+    onPressItem = (item) => {
+        const { navTo } = this.props;
+        navTo('RoomDetail', item);
     }
 
     render() {
@@ -22,7 +26,11 @@ class RoomList extends React.Component {
 
         const roomsView = rooms.map((each) => {
             return (
-                <Card key={each.id} data={each}/>
+                <Card 
+                    key={each.id}
+                    data={each}
+                    onPressItem={this.onPressItem.bind(this, each)}
+                />
             )
         })
 
@@ -34,11 +42,9 @@ class RoomList extends React.Component {
     }
 }
 RoomList.propTypes = {
-    rooms:PropTypes.array.isRequired,
 };
 
 RoomList.defaultProps = {
-    rooms:[]
 }
 
 const Container = styled.ScrollView`

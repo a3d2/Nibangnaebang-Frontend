@@ -13,7 +13,7 @@ const defaultNavOptions = ({ navigation }) => {
 
 let Stacks = {
     Home: { screen: Home, navigationOptions:defaultNavOptions },
-    RoomDeatil: { screen: RoomDetail, navigationOptions:defaultNavOptions  }
+    RoomDetail: { screen: RoomDetail, navigationOptions:defaultNavOptions  }
 }
 
 export const HomeStacks = Object.keys(Stacks).reduce((acc, cur) => {

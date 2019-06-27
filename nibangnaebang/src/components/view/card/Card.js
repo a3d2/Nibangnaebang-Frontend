@@ -13,11 +13,13 @@ class Card extends Component {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, onPressItem } = this.props;
         if(!data) return null;
 
         return (
-            <Container>
+            <Container
+                onPress={onPressItem}
+            >
                 <LeftContainer>
                     <Image
                         source={{ uir:data.image }}
@@ -44,12 +46,13 @@ class Card extends Component {
 
 Card.propTypes = {
     data:PropTypes.object.isRequired,
+    onPressItem:PropTypes.func,
 };
 
 Card.defaultProps = {
 }
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
     padding:20px;
     margin-bottom:20;
     border-bottom-width:1px;
