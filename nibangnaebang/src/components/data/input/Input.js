@@ -37,7 +37,6 @@ class Input extends Component {
             inputStyle,
             accessoryView,
             removeUnderline,
-            errorMessage
         } = this.props;
 
         const { showPassword, accWidth } = this.state;
@@ -107,25 +106,11 @@ const InnerContainer = styled.View`
     display: flex;
     flex-direction:row;
     width:100%;
-    margin-top:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
-    padding-bottom:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0};
+    /* margin-top:${props => props.underline ? Platform.OS === 'ios' ? 14.5 : 0 : 0}; */
+    padding-bottom:${props => props.underline ? Platform.OS === 'ios' ? 7 : 0 : 0};
     border-bottom-width:${props => props.underline ? 1 : 0};
     border-bottom-color:${colors.lightPeriwinkle};
     padding-right:${props => props.paddingRight};
-`;
-
-const VisibilityButton = styled.TouchableOpacity`
-    position:absolute;
-    top: ${Platform.OS === "ios" ? 0 : 15};
-    right: 0;
-    bottom: 0;
-    justify-content:center;
-    align-items:center;
-    padding:5px;
-    padding-right:0px;
-`;
-const EyeIcon = styled.Image`
-    width:17; height:17;
 `;
 
 const AccessoryContainer = styled.View`

@@ -55,14 +55,10 @@ class UploadStepPeriod extends React.Component {
         return (
             <Container>
                 <FilterView
-                    title1={`방을 비우실\n기간을 선택해주세요`}
-                    title2={`가격을 입력해주세요`}
-                    accessoryView={this.renderPriceCalcButton()}
-                    accContainerStyle={{
-                        position:'absolute',
-                        right:0,
-                        bottom:12,
-                    }}
+                    periodTitle={`거주기간`}
+                    priceTitle={`가격`}
+                    genderTitle={`성별`}
+                    onPressCalcButton={this.onPressCalcButton}
                 />
                 <NormalButton
                     disabled={false}
@@ -81,6 +77,7 @@ UploadStepPeriod.defaultProps = {
 
 const Container = styled.ScrollView`
     flex:1;
+    padding-horizontal:20;
 `;
 
 const PriceCalcButtonContainer = styled.TouchableOpacity`

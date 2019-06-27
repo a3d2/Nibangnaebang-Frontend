@@ -40,7 +40,7 @@ export const TabsConfig = Object.keys(Tabs).reduce((acc, cur) => {
 }, {});
 
 const TabNavigator = createBottomTabNavigator(Tabs, {
-    initialRouteName: TabsConfig.Home,
+    initialRouteName: TabsConfig.Upload,
     lazy: false,
 });
 

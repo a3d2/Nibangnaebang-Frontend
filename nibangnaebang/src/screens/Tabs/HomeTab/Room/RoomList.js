@@ -122,8 +122,9 @@ class RoomList extends React.Component {
                 >
                     <FilterContainer>
                         <FilterView
-                            title1={`거주 기간`}
-                            title2={`가격 범위`}
+                            periodTitle={`거주 기간`}
+                            priceTitle={`가격 범위`}
+                            genderTitle={`성별`}
                         />
                         <NormalButton
                             onPress={this.onConfirmFilter}
