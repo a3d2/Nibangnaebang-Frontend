@@ -3,6 +3,8 @@ import { inject } from 'mobx-react';
 import styled from 'styled-components/native';
 
 @inject(stores => ({
+    setNav:stores.nav.setNav,
+    navTo:stores.nav.navTo
     spin:stores.spinner.spin
 }))
 class Home extends React.Component {
@@ -12,6 +14,15 @@ class Home extends React.Component {
         this.state = {
         }
     }
+    componentDidMount() {
+        const { navigation, setNav } = this.props;
+        setNav(navigation);
+    }
+
+    navToRoomDetail = () => {
+        const { navTo } = this.props;
+        navTo('RoomDeatil');
+    }
 
     render() {
         const { 
@@ -19,13 +30,9 @@ class Home extends React.Component {
 
         return (
             <Container>
-                <Button
-                    onPress={() => {
-                        this.props.spin();
-                    }}
-                >
+                <Button onPress={this.navToRoomDetail}>
                     <Text>
-                        spin
+                        nav
                     </Text>
                 </Button>
             </Container>
@@ -40,7 +47,5 @@ const Button = styled.TouchableOpacity`
 const Text = styled.Text`
     color:red;
 `;
-const a = styled.View`
-`
 
 export default Home;
