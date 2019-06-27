@@ -10,6 +10,7 @@ import RoomMapView from '../../../../components/view/map/MapView';
 import assets from "@assets/general";
 import SearchInput from '../../../../components/data/input/SearchInput';
 import { StatusBarHeight } from '../../../../utils/utils';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
@@ -121,15 +122,26 @@ class RoomList extends React.Component {
                     onRequestClose={this.closeFilter}
                 >
                     <FilterContainer>
-                        <FilterView
-                            periodTitle={`거주 기간`}
-                            priceTitle={`가격 범위`}
-                            genderTitle={`성별`}
-                        />
-                        <NormalButton
-                            onPress={this.onConfirmFilter}
-                            label={'적용하기'}
-                        />
+                        <FilterHeader>
+                            <CloseButton
+                                onPress={this.closeFilter}
+                            >
+                                <CloseIcon source={assets.iconClose}/>
+                            </CloseButton>
+                        </FilterHeader>
+                        <FilterInnerContainer>
+                            <FilterView
+                                periodTitle={`거주 기간`}
+                                priceTitle={`가격 범위`}
+                                genderTitle={`성별`}
+                            />
+                            <FilterButtonContainer>
+                                <NormalButton
+                                    onPress={this.onConfirmFilter}
+                                    label={'적용하기'}
+                                />
+                            </FilterButtonContainer>
+                        </FilterInnerContainer>
                     </FilterContainer>
                 </Modal>
                 <Modal
@@ -138,9 +150,16 @@ class RoomList extends React.Component {
                     onRequestClose={this.closeMap}
                 >
                     <MapContainer>
-                        <RoomMapView
+                        <FilterHeader>
+                            <CloseButton
+                                onPress={this.closeMap}
+                            >
+                                <CloseIcon source={assets.iconClose}/>
+                            </CloseButton>
+                        </FilterHeader>
+                        {/* <RoomMapView
                             region={region}
-                        />
+                        /> */}
                     </MapContainer>
                 </Modal>
             </Container>
@@ -198,10 +217,30 @@ const MapIcon = styled.Image`
 `;
 
 const FilterContainer = styled.View`
+    padding-top: ${getStatusBarHeight() + 10};
+`;
+const FilterHeader = styled.View`
+    padding-left:8;
+    padding-right:20;
+    padding-vertical:4;
+`;
+const CloseButton = styled.TouchableOpacity`
+    padding:10px;
+    bottom:20;
+`;
+const CloseIcon = styled.Image`
+    width:16;
+    height:16;
+`;
+const FilterInnerContainer = styled.View`
+    padding-horizontal:20;
+`;
+const FilterButtonContainer = styled.View`  
+    margin-top:140;
+    flex-shrink:1;
 `;
 
 const MapContainer = styled.View`
-    flex:1;
 `;
 
 export default RoomList;

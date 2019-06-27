@@ -15,6 +15,10 @@ class UploadStepPeriod extends React.Component {
         super(props);
 
         this.state = {
+            switchValue:undefined,
+            price:0,
+            startDate:null,
+            endDate:null,
         }
     }
 
@@ -24,11 +28,12 @@ class UploadStepPeriod extends React.Component {
     }
     
     onCalculateConfirm = (price) => {
+        this.filterRef.setPrice(price)
     }
 
     onPressNext = () => {
         const { navTo } = this.props;
-        navTo('UploadStepDesc', {  })
+        navTo('UploadStepDesc', this.state)
     }
 
     openCalendar = () => {
@@ -49,8 +54,20 @@ class UploadStepPeriod extends React.Component {
             </PriceCalcButtonContainer>
         )
     }
+
+    onSwitcherValueChange = (value) => {
+        this.setState({ switchValue:value });
+    }
+    onPriceChange = (value) => {
+        this.setState({ price:value });
+    }
+    onSelectDates = (start, end) => {
+        this.setState({ startDate:start, endDate:end });
+    }
     
     render() {
+        const { price, endDate, startDate } = this.state;
+
         return (
             <Container
                 contentContainerStyle={{
@@ -60,14 +77,18 @@ class UploadStepPeriod extends React.Component {
                 }}
             >
                 <FilterView
+                    ref={ref => { this.filterRef = ref; }}
                     periodTitle={`거주기간`}
                     priceTitle={`가격`}
                     genderTitle={`성별`}
                     onPressCalcButton={this.onPressCalcButton}
+                    onSelectDates={this.onSelectDates}
+                    onPriceChange={this.onPriceChange}
+                    onSwitchValueChange={this.onSwitcherValueChange}
                 />
                 <ConfirmButtonContainer>
                     <NormalButton
-                        disabled={false}
+                        disabled={!price && !startDate && !endDate}
                         onPress={this.onPressNext}
                         label={'다음'}
                     />

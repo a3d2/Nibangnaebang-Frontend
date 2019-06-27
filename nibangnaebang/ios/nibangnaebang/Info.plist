@@ -24,12 +24,25 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>방 사진을 가져오기 위해 권한이 필요해요</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>방 위치를 찾기 위해 사용자의 위치가 필요해요</string>
-  <key>NSCameraUsageDescription</key>
-  <string>방 사진을 가져오기 위해 권한이 필요해요</string>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>방 사진을 가져오기 위해 권한이 필요해요</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>방 사진을 가져오기 위해 권한이 필요해요</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -44,18 +57,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
 </dict>
 </plist>

@@ -6,6 +6,7 @@ import Input from '../../../../components/data/input/Input';
 import NormalButton from '../../../../components/feedback/button/NormalButton';
 import colors from '../../../../colors/colors';
 import { numberWithCommas } from '../../../../utils/utils';
+import { InputType } from '../../../../components/data/input/TextInput';
 
 const RoomType = {
     month:'month',
@@ -133,6 +134,7 @@ class PriceCalculator extends React.Component {
                         가격
                     </Title>
                     <Input
+                        type={InputType.number}
                         placeholder={'가격을 입력해주세요'}
                         inputStyle={{
                             marginTop:20,

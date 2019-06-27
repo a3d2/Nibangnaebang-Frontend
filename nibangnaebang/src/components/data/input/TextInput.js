@@ -50,6 +50,10 @@ class TextInput extends Component {
         onSubmitEditing && onSubmitEditing(value)
     }
 
+    setValue = (value) => {
+        this.setState({ value:value });
+    }
+
     render() {
         const {
             ref,
@@ -57,8 +61,8 @@ class TextInput extends Component {
             type,
         } = this.props;
 
-        const { value } = this.state;
-
+        let { value } = this.state;
+        value = (value || '').toString();
 
         return (
             <Input

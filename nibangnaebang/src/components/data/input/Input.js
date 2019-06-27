@@ -29,6 +29,10 @@ class Input extends Component {
         onSubmitEditing && onSubmitEditing(value)
     }
 
+    setValue = (value) => {
+        this.inputRef.setValue(value)
+    }
+
     render() {
         const {
             containerStyle,
@@ -52,6 +56,7 @@ class Input extends Component {
                     style={containerStyle}
                 >
                     <TextInput
+                        ref={ref => { this.inputRef = ref; }}
                         {...this.props}
                         style={inputStyle}
                         {...type}

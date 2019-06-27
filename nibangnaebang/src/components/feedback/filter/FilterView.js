@@ -16,7 +16,10 @@ class FilterView extends Component {
 
         this.state = {
             drawerVisible:false,
-            switchValue:false
+            switchValue:false,
+            price:0,
+            start:'',
+            end:''
         };
     }
 
@@ -32,10 +35,24 @@ class FilterView extends Component {
         this.setState({ switchValue:value });
         onSwitchValueChange && onSwitchValueChange(value);
     }
+    setPrice = (price) => {
+        this.inputRef.setValue(price)
+    }
+    onPriceChange = (value) => {
+        this.setState({ price:value });
+        const { onPriceChange } = this.props;
+        onPriceChange && onPriceChange(value)
+    }
+    onSelectDates = (start, end) => {
+        this.closeCalendar();
+        const { onSelectDates } = this.props;
+        onSelectDates && onSelectDates(start, end);
+        this.setState({ start:start.dateString, end:end.dateString });
+    }
 
     render() {
         const { periodTitle, priceTitle, genderTitle, onPressCalcButton } = this.props;
-        const { drawerVisible, switchValue } = this.state;
+        const { drawerVisible, switchValue, start, end } = this.state;
 
         return (
             <Container>
@@ -52,19 +69,19 @@ class FilterView extends Component {
                                 onPress={this.openCalendar}
                             >
                                 <PeriodText>
-                                    2019.06.25
+                                    {start}
                                 </PeriodText>
                             </PeriodItemTextContainer>
                         </PeriodItemContainer>
                         <PeriodItemContainer right>
                             <PeriodTitle>
-                                언제부터
+                                언제까지
                             </PeriodTitle>
                             <PeriodItemTextContainer
                                 onPress={this.openCalendar}
                             >
                                 <PeriodText>
-                                    2019.06.25
+                                    {end}
                                 </PeriodText>
                             </PeriodItemTextContainer>
                         </PeriodItemContainer>
@@ -89,10 +106,12 @@ class FilterView extends Component {
                     </PriceTitleContainer>
 
                     <Input
+                        ref={ref => { this.inputRef = ref; }}
                         placeholder={'가격을 입력해주세요'}
                         inputStyle={{
                             fontSize:24
                         }}
+                        onChangeText={this.onPriceChange}
                     />
                 </PriceContainer>
 
@@ -122,6 +141,7 @@ class FilterView extends Component {
                 <CalendarModal
                     visible={drawerVisible}
                     onRequestClose={this.closeCalendar}
+                    onSelectDates={this.onSelectDates}
                 />
             </Container>
         );
