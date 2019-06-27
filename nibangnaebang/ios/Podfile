@@ -19,6 +19,8 @@ target 'nibangnaebang' do
   ]
 
   pod 'RNImageCropPicker', :path =>  '../node_modules/react-native-image-crop-picker'
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
 end
 
 # very important to have, unless you removed React dependencies for Libraries 

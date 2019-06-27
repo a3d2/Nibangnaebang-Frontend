@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { inject } from 'mobx-react';
+import TabNavigator from "../navigators/TabNavigator";
 
 @inject(stores => ({
 }))
@@ -21,7 +22,14 @@ class Splash extends React.Component {
 
     render() {
         // A. navigate to tab if logged in
-
+        
+        if(true) {   //TODO to login
+            return(
+                <NavigatorContainer>
+                    <TabNavigator/>
+                </NavigatorContainer>
+            )
+        }
         // B. display login page if user needs login
 
         return (
@@ -33,6 +41,10 @@ class Splash extends React.Component {
         );
     }
 }
+
+const NavigatorContainer = styled.View`
+    flex:1;
+`;
 
 const Container = styled.View`
     flex:1;

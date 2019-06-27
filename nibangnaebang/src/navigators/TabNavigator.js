@@ -1,9 +1,6 @@
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import * as Tab from '../screens/Tabs';
 import React from 'react'
-import i18n from 'i18n-js';
-import colors from '../colors/colors';
-import TabIcon from '../components/feedback/icon/TabIcon';
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
