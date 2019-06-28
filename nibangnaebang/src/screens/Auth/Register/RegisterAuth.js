@@ -28,8 +28,8 @@ class RegisterAuth extends React.Component {
 
     onPressAuth = () => {
         const { navTo, register } = this.props;
-        const { id, password, school, image } = this.state;
-        register(id, password, school, image).then((user) => {
+        const { id, password, gender, school, image } = this.state;
+        register(id, password, gender, school, image).then((user) => {
             if(user)
                 navTo('RegisterComplete', user);
         });

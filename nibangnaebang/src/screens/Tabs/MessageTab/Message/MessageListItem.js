@@ -22,7 +22,7 @@ class MessageListItem extends Component {
                 onPress={onPressItem}
             >
                 <ProfileImage
-                    source={otherUserGender === "male" ? assets.iconFaceM : assets.iconFaceW}
+                    source={otherUserGender === "male" ? assets.iconFaceM : assets.iconFaceF}
                 />
                 <TextView>
                     <Id>

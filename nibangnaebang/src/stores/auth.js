@@ -52,7 +52,7 @@ class AuthStore {
     }
 
     @action
-    register = async (id, pw, school, image) => {    
+    register = async (id, pw, gender, school, image) => {    
         return fetch(`${BASE_URI}`, {
             method: 'POST',
             headers: {
@@ -63,7 +63,7 @@ class AuthStore {
                 user:{
                     id:id,
                     pwd:pw,
-                    gender:'male',
+                    gender:gender,
                     school:school,
                     token:'t'
                 }

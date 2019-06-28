@@ -46,7 +46,7 @@ class MessageDetail extends React.Component {
                     <LeftContainer>
                         {!isMine &&
                             <ProfileImage
-                                source={each.sendUserGender === "male" ? assets.iconFaceM : assets.iconFaceW}
+                                source={each.sendUserGender === "male" ? assets.iconFaceM : assets.iconFaceF}
                             />
                         }
                     </LeftContainer>

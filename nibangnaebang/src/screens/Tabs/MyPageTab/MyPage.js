@@ -43,13 +43,14 @@ class MyPage extends React.Component {
 
     render() {
         const { user, logout } = this.props;
+        console.log("TCL: MyPage -> render -> user", user)
 
         return (
             <Container>
                 <ProfileContainer>
                     <ProfileImageContainer>
                         <ProfileImage
-                            source={user.Gender === "male" ? assets.iconFaceM : assets.iconFaceW}
+                            source={user.Gender === "male" ? assets.iconFaceM : assets.iconFaceF}
                         />
                     </ProfileImageContainer>
                     <ProfileInfoContainer>

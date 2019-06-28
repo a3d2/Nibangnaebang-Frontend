@@ -70,7 +70,7 @@ class RoomDetail extends React.Component {
                 <ProfileContainer>
                     <ProfileImageContainer>
                         <ProfileImage
-                            source={roomDetail.SellerGender === "male" ? assets.iconFaceM : assets.iconFaceW}
+                            source={roomDetail.SellerGender === "male" ? assets.iconFaceM : assets.iconFaceF}
                         />
                     </ProfileImageContainer>
                     <ProfileInfoContainer>

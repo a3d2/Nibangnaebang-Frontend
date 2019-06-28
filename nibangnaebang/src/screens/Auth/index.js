@@ -33,7 +33,7 @@ export const AuthStacks = Object.keys(Stacks).reduce((acc, cur) => {
 }, {});
 
 const StackNavigator = createStackNavigator(Stacks, {
-    initialRouteName: AuthStacks.RegisterGender,
+    initialRouteName: AuthStacks.Login,
     defaultNavigationOptions: StackNavOptions,
     headerLayoutPreset: 'center' 
 });

@@ -16,8 +16,11 @@ import NormalButton from '../../../components/feedback/button/NormalButton';
 class RegisterGender extends React.Component{
     constructor(props){
         super(props);
+        const { params } = props.navigation.state;
 
         this.state = {
+            ...params,
+            
             gender:'',
         }
     }
@@ -29,7 +32,7 @@ class RegisterGender extends React.Component{
 
     onPressNext = () => {
         const {navTo} = this.props;
-        navTo('RegisterAuth')
+        navTo('RegisterAuth', this.state);
     }
 
     onMale = () => {
