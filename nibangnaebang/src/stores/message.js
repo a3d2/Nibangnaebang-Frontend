@@ -54,5 +54,30 @@ class MessageStore {
             console.error(error);
         });
     }
+
+    @action
+    sendMessage = async (from, to, message) => {
+        return fetch(`${BASE_URI}`, {
+            method: 'POST',
+            body:getBody({
+                query:"acceptRoom",
+                sendUser:from,
+                receiveUser:to,
+                msg:message
+            })
+        })
+        .then(res => res.json())
+        .then((res) => {
+            console.log("TCL: res", res)
+
+            return new Promise((resolve, _) => {
+                resolve(res);
+            })
+        })
+        .catch(error => {
+            this.fetching = false;
+            console.error(error);
+        });
+    }
 }
 export default new MessageStore();

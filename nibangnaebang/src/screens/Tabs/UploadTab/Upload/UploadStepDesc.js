@@ -9,11 +9,13 @@ import CheckButton from '../../../../components/feedback/button/CheckButton';
 import assets from '@assets/general'
 import colors from '../../../../colors/colors';
 import Input from '../../../../components/data/input/Input';
+import { showAlert } from '../../../../utils/utils';
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
     createRoom:stores.room.createRoom,
-    user:stores.auth.user
+    user:stores.auth.user,
+    reset:stores.nav.reset,
 }))
 class UploadStepDesc extends React.Component {
     constructor(props) {
@@ -72,17 +74,27 @@ class UploadStepDesc extends React.Component {
 
     upload = () => {
         const { createRoom, user } = this.props;
-        createRoom({
-            title:this.state.title,
-            pay:this.state.price,
-            detail:this.state.desc,
-            address:this.state.address,
-            ALStart:this.state.startDate.dateString,
-            ALEnd:this.state.endDate.dateString,
-            school:this.state.school,
-            userNo:user.UserNo,
-            sameGender:this.state.switchValue ? 1 : 0,
-        })
+
+        const { title, price, desc, address, startDate, endDate, school, images, switchValue } = this.state;
+
+        if(title && price && desc && address && startDate && endDate && school) {
+            createRoom({
+                title:title,
+                pay:price,
+                detail:desc,
+                address:address,
+                ALStart:startDate.dateString,
+                ALEnd:endDate.dateString,
+                school:school,
+                userNo:user.UserNo,
+                sameGender:switchValue ? 1 : 0,
+            }, images).then(() => {
+                this.props.reset('UploadStepPeriod');
+                this.props.navTo('Home');
+            })
+        } else {
+            showAlert('모든 정보를 입력해주세요')
+        }
     }
 
     render() {

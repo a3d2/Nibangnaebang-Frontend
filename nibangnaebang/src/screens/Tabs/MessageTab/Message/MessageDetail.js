@@ -35,7 +35,6 @@ class MessageDetail extends React.Component {
         const { messages } = this.state;
         const { user } = this.props;
 
-        console.log("TCL: MessageDetail -> render -> messages", messages)
         const messagesView = messages.map(each => {
             const isMine = each.sendUser === user.UserNo
 

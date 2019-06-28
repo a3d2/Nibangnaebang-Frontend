@@ -3,13 +3,16 @@ import * as Tab from '../screens/Tabs';
 import React from 'react'
 import TabIcon from '../components/view/icon/TabIcon';
 import colors from '../colors/colors';
+import { TabName } from '../constants/const';
 
 const defaultNavOptions = ({ navigation }) => {
     const { routeName } = navigation.state;
   
     switch (routeName) {
+        
         default:
           return {
+                title:TabName[routeName],
                 tabBarIcon: ({ focused }) => {
                     return <TabIcon type={routeName} focused={focused}/>;
                 },

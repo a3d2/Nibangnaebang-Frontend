@@ -7,31 +7,39 @@ import ImagePicker from 'react-native-image-crop-picker';
 import BackButton from '../../../components/feedback/button/BackButton';
 import colors from '../../../colors/colors'
 import assets from "@assets/general";
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 
 @inject(stores => ({
     navTo:stores.nav.navTo,
+    register:stores.auth.register
 }))
 class RegisterAuth extends React.Component {
     constructor(props) {
         super(props);
+        const { params } = props.navigation.state;
 
         this.state = {
+            ...params,
+
             image:undefined
-            
         }
     }
 
     onPressAuth = () => {
-        const { navTo } = this.props;
-        navTo('RegisterComplete');
+        const { navTo, register } = this.props;
+        const { id, password, school, image } = this.state;
+        register(id, password, school, image).then((user) => {
+            if(user)
+                navTo('RegisterComplete', user);
+        });
     }
 
     openCamera = () => {
         // ImagePicker.openCamera({
         ImagePicker.openPicker({
-            width: 300,
-            height: 400,
+            width: 139,
+            height: 187,
             cropping: true,
         }).then(image => {
             this.setState({ image:image })
@@ -114,6 +122,7 @@ RegisterAuth.defaultProps = {
 
 const Container = styled.ScrollView`
     flex:1;
+    padding-top:${getStatusBarHeight()};
     padding-horizontal:20;
 `;
 

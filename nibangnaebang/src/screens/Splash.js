@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { inject } from 'mobx-react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, DeviceEventEmitter } from 'react-native';
 import TabNavigator from "../navigators/TabNavigator";
 import AuthNavigator from "./Auth/index";
 
@@ -28,6 +28,8 @@ class Splash extends React.Component {
         const pw = await AsyncStorage.getItem('pw');
         if(id && pw)
             await login(id, pw);
+
+        // DeviceEventEmitter.addListener('registerComplete', this.forceUpdate)
     }
 
     render() {

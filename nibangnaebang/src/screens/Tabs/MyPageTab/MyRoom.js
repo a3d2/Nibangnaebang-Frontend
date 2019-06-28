@@ -29,21 +29,21 @@ class MyRoom extends React.Component {
         const { rooms } = this.props;
         if(!rooms) return;
 
-        const roomsView = rooms.map((each) => {
-            return (
-                <RoomCard
-                    owner
-                    key={each.id}
-                    data={each}
-                    onPressItem={this.onPressItem.bind(this, each)}
-                    onPressConfirm={this.onPressConfirm.bind(this, each)}
-                />
-            )
-        })
+        // const roomsView = rooms.map((each) => {
+        //     return (
+        //         <RoomCard
+        //             owner
+        //             key={each.id}
+        //             data={each}
+        //             onPressItem={this.onPressItem.bind(this, each)}
+        //             onPressConfirm={this.onPressConfirm.bind(this, each)}
+        //         />
+        //     )
+        // })
 
         return (
             <Container>
-                {roomsView}
+                {/* {roomsView} */}
             </Container>
         );
     }
