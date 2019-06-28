@@ -49,7 +49,7 @@ class Splash extends React.Component {
                 </NavigatorContainer>
             )
         } 
-        if(user.UserNo && !waiting) {
+        if(!user.UserNo && !waiting) {
             return(
                 <NavigatorContainer>
                     <AuthNavigator/>

@@ -6,6 +6,7 @@ import styled from 'styled-components/native';
 import NormalButton from '../../feedback/button/NormalButton';
 import colors from '../../../colors/colors';
 import { IMAGE_URI } from '../../../constants/const';
+import { numberWithCommas } from '../../../utils/utils';
 
 class RoomCard extends Component {
     constructor(props) {
@@ -41,10 +42,10 @@ class RoomCard extends Component {
                             {data.Title}
                         </Title>
                         <Period>
-                            {/* {data.period} */}
+                            {`${data.ALStart}~${data.ALEnd}`}
                         </Period>
                         <Price>
-                            {data.Pay}
+                            {numberWithCommas(data.Pay)}
                         </Price>
                     </RightContainer>
                 </InnerContainer>

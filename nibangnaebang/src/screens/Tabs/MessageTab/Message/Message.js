@@ -13,6 +13,7 @@ class Message extends React.Component {
         super(props);
 
         this.state = {
+            message:''
         }
     }
 
@@ -21,6 +22,13 @@ class Message extends React.Component {
         loadMessages(user.UserNo);
     }
     
+    onMessageChange = (value) => {
+        this.setState({ message:value })
+    }
+    sendMessage = () => {
+        const { message } = this.state;
+        console.log("TCL: Message -> sendMessage -> message", message)
+    }
 
     render() {
         return (

@@ -86,20 +86,26 @@ class RoomDetail extends React.Component {
                     </MapButton> */}
                 </ProfileContainer>
 
-                <Divider/>
+                <Divider noMargin style={{
+                    marginTop:12,
+                    marginBottom:16
+                }}/>
                 
                 <DescContainer>
+                    <Title>
+                        {roomDetail.Title}
+                    </Title>
                     <TextContainer>
                         <LocationIcon source={assets.iconLocation}/>
-                            <Title>
-                                {roomDetail.Title}
-                            </Title>
+                        <Location>
+                            {roomDetail.Address}
+                        </Location>
                     </TextContainer>
                     <TextContainer>
                         <SchoolIcon source={assets.iconSchool}/>
-                            <Location>
-                                {roomDetail.Address}
-                            </Location>
+                        <School>
+                            {roomDetail.School}
+                        </School>
                     </TextContainer>
 
                     <Divider/>
@@ -141,12 +147,19 @@ const ProfileImage = styled.Image`
     height:36;
 `;
 const ProfileInfoContainer = styled.View`
+    padding-left:12;
 `;
 const ProfileNameText = styled.Text`
-    padding-horizontal:12;
+    font-size:15;
+    font-weight:bold;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
 `;
 const ProfileSchoolText = styled.Text`
-    padding-horizontal:12;
+    font-size:13;
+    line-height:19;
+    letter-spacing:-0.3;
+    color:${colors.blueyGrey};
 `;
 const MapButton = styled.TouchableOpacity`
     right:20;
@@ -158,11 +171,29 @@ const DescContainer= styled.View`
     padding-bottom:60;
 `;
 const Title = styled.Text`
+    font-size:20;
+    line-height:28;
+    font-weight:bold;
+    letter-spacing:-0.5;
+    color:${colors.darkGrey};
+    margin-bottom:4;
+
+`;
+const School = styled.Text`
+    font-size:15;
+    line-height:22;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
 `;
 const Location = styled.Text`
+    font-size:15;
+    line-height:22;
+    letter-spacing:-0.3;
+    color:${colors.darkGrey};
 `;
 const Description = styled.Text`
-    padding-top:16;
+    /* flex:1; */
+    height:100;
 `;
 
 const BottomButtonContainer = styled.View`
@@ -179,13 +210,13 @@ const Divider = styled.View`
     height:1;
     width:100%;
     background-color:${colors.paleGrey};
-    margin-vertical:16;
+    margin-vertical:${props => props.noMargin ? 0 : 15};
 `;
 
 const TextContainer = styled.View`
     flex-direction:row;
     align-items:center;
-    margin-bottom:8;
+    margin-bottom:4;
 `;
 
 const SchoolIcon = styled.Image`
