@@ -8,7 +8,6 @@ import AuthNavigator from "./Auth/index";
 @inject(stores => ({
     spinning:stores.spinner.spinning,
     user:stores.auth.user,
-    UserNo:stores.auth.user.UserNo,
     login:stores.auth.login
 }))
 class Splash extends React.Component {
@@ -30,16 +29,15 @@ class Splash extends React.Component {
         if(id && pw)
             await login(id, pw);
 
-        DeviceEventEmitter.addListener('registerComplete', this.forceUpdate)
+        // DeviceEventEmitter.addListener('registerComplete', this.forceUpdate)
     }
 
     render() {
         // A. navigate to tab if logged in
-        const { spinning, user, UserNo } = this.props;
-        console.log("TCL: render -> UserNo", UserNo)
+        const { spinning, user } = this.props;
         
         // if(true || user.UserNo) {
-        if(UserNo) {
+        if(user.UserNo) {
             return(
                 <NavigatorContainer>
                     <TabNavigator/>

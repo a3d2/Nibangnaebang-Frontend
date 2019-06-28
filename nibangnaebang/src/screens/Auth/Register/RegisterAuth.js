@@ -30,7 +30,8 @@ class RegisterAuth extends React.Component {
         const { navTo, register } = this.props;
         const { id, password, school, image } = this.state;
         register(id, password, school, image).then((user) => {
-            navTo('RegisterComplete', user);
+            if(user)
+                navTo('RegisterComplete', user);
         });
     }
 

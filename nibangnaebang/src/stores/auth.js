@@ -18,6 +18,8 @@ class AuthStore {
 
     @action
     login = async (id, pw) => {
+    console.log("TCL: AuthStore -> login -> id, pw", id, pw)
+        
         return fetch(`${BASE_URI}`, {
             method: 'POST',
             body:getBody({
@@ -28,6 +30,7 @@ class AuthStore {
         })
         .then(res => res.json())
         .then((user) => {
+            console.log("TCL: AuthStore -> user", user)
             if(user.IsExistUser) {
                 this.user = user;
 
@@ -74,10 +77,11 @@ class AuthStore {
                 AsyncStorage.setItem('id', id);
                 AsyncStorage.setItem('pw', pw);
 
-                return new Promise((resolve, _) => {
-                    resolve(user);
-                })
             }
+
+            return new Promise((resolve, _) => {
+                resolve(user.ResMsg  === "Success" ? user : false);
+            })
         })
         .catch(error => {
             this.fetching = false;

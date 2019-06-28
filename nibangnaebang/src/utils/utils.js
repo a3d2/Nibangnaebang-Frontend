@@ -110,12 +110,14 @@ export const getBody = (object, file) => {
     const formData = new FormData()
     formData.append('jsonString', JSON.stringify(object));
 
-    const uri = file.path;
-    const ext = uri.split('.').pop();
-    const fileName = file.filename;
-
-    file = { uri: uri, name: fileName, type: `image/${ext}` };
-    formData.append('file', file);
+    if(file) {
+        const uri = file.path;
+        const ext = uri.split('.').pop();
+        const fileName = file.filename;
+    
+        file = { uri: uri, name: fileName, type: `image/${ext}` };
+        formData.append('file', file);
+    }
     
     return formData;
 }

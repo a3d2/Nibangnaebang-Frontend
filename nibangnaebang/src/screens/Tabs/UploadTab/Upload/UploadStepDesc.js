@@ -72,6 +72,7 @@ class UploadStepDesc extends React.Component {
 
     upload = () => {
         const { createRoom, user } = this.props;
+
         createRoom({
             title:this.state.title,
             pay:this.state.price,
@@ -82,7 +83,7 @@ class UploadStepDesc extends React.Component {
             school:this.state.school,
             userNo:user.UserNo,
             sameGender:this.state.switchValue ? 1 : 0,
-        })
+        }, this.state.images)
     }
 
     render() {
