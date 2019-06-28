@@ -65,7 +65,7 @@ class MyPage extends React.Component {
                     </ProfileInfoContainer>
                 </ProfileContainer>
                 <RoomsContainer>
-                    {this.renderSection('내가 올린 방', '', 'MyRoom')}
+                    {/* {this.renderSection('내가 올린 방', '', 'MyRoom')} */}
                     {/* {this.renderSection('찜한 방', '', 'PickedRoom')} */}
                 </RoomsContainer>
                 {/* <ConfigContainer> */}

@@ -200,6 +200,7 @@ const Container = styled.ScrollView`
 
 const RoomImagesContainer = styled.ScrollView`
     flex-direction:row;
+    margin-top:12;
 `
 const AddRoomImageButton = styled.TouchableOpacity`
     margin-right:12;

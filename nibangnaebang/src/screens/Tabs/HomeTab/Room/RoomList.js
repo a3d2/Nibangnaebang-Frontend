@@ -6,7 +6,7 @@ import RoomCard from '../../../../components/view/card/RoomCard';
 import { Modal } from 'react-native'
 import FilterView from '../../../../components/feedback/filter/FilterView';
 import NormalButton from '../../../../components/feedback/button/NormalButton';
-import RoomMapView from '../../../../components/view/map/MapView';
+// import RoomMapView from '../../../../components/view/map/MapView';
 import assets from "@assets/general";
 import SearchInput from '../../../../components/data/input/SearchInput';
 import { StatusBarHeight } from '../../../../utils/utils';

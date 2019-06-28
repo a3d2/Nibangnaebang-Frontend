@@ -46,8 +46,8 @@ SearchInput.defaultProps = {
 }
 
 const InputContainer = styled.View`
-    /* padding-bottom:${Platform.OS === 'ios' ? 9 : 0}; */
-    padding-vertical:9px;
+    padding-bottom:${Platform.OS === 'ios' ? 9 : 0};
+    padding-top:${Platform.OS === 'ios' ? 9 : 0};
     padding-horizontal:12px;
     background-color:${colors.paleGrey};
     border-radius:8;

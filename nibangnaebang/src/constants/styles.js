@@ -3,7 +3,7 @@ import colors from "../colors/colors";
 
 const headerHeight = Platform.select({
     ios: 44,
-    android: 60
+    android: 44
 })
 
 export const StackNavOptions = {
