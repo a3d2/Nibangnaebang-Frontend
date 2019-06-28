@@ -36,6 +36,7 @@ class RegisterInfo extends React.Component {
 
     onPressNext = () => {
         const { navTo } = this.props;
+        navTo('RegisterGender');
         navTo('RegisterAuth', this.state);
     }
 
