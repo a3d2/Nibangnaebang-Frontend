@@ -11,8 +11,8 @@ import { IMAGE_URI } from '../../../../constants/const';
 
 export const RoomStatus = {
     onSale:'연락하기',
-    pending:'거래완료',
-    soldOut:'거래가 완료되었습니다',
+    pending:'확정하기',
+    soldOut:'확정되었습니다',
 }
 
 @inject((stores, ownProps) => {
@@ -22,7 +22,8 @@ export const RoomStatus = {
     return {
         navTo:stores.nav.navTo,
         roomDetail:roomDetail,
-        loadRoomDetail:stores.room.loadRoomDetail
+        loadRoomDetail:stores.room.loadRoomDetail,
+        user:stores.auth.user
     }
 })
 class RoomDetail extends React.Component {
@@ -42,14 +43,24 @@ class RoomDetail extends React.Component {
     
 
     onPressButton = () => {
+        const { roomDetail, user, navTo } = this.props;
 
+        const isSeller = user.UserNo === roomDetail.Seller;
+
+        if(isSeller) {
+            // acceptRoom(roomDetail.)
+        } else {
+            navTo('Message');
+        }
     }
 
     render() {
-        const { roomDetail } = this.props;
-        const { roomStatus } = this.state;
+        const { roomDetail, user } = this.props;
+        console.log("TCL: RoomDetail -> render -> roomDetail", roomDetail)
 
-        const buttonLabel = roomStatus
+        const roomStatus = user.UserNo === roomDetail.Seller ? RoomStatus.pending : RoomStatus.onSale;
+
+        const buttonLabel =  roomStatus;
 
         return (
             <Container>

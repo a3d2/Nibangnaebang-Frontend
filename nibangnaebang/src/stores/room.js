@@ -9,6 +9,35 @@ class RoomStore {
     };
 
     @action
+    acceptRoom = (roomNo) => {
+        return fetch(`${BASE_URI}`, {
+            method: 'POST',
+            body:getBody({
+                query:"acceptRoom",
+                RoomNo:roomNo
+            })
+        })
+        .then(res => res.json())
+        .then((result) => {
+            console.log("TCL: RoomStore -> result", result)
+            // if(RoomNo) {
+            //     this.rooms[RoomNo] = room;
+                
+            //     images.forEach(each => {
+            //         this.uploadImage(each, RoomNo);
+            //     })
+            // }
+            // return new Promise((resolve, _) => {
+            //     resolve(RoomNo);
+            // })
+        })
+        .catch(error => {
+            this.fetching = false;
+            console.error(error);
+        });
+    }
+
+    @action
     createRoom = async (room, images) => {
         return fetch(`${BASE_URI}`, {
             method: 'POST',
@@ -50,8 +79,6 @@ class RoomStore {
         })
         .then(res => res.json())
         .then((success) => {
-            console.log("TCL: success", success)
-
             return new Promise((resolve, _) => {
                 resolve();
             })
@@ -97,6 +124,7 @@ class RoomStore {
         })
         .then(res => res.json())
         .then((detail) => {
+            console.log("TCL: detail", detail)
             detail.images= detail.images.map(each => {
                 return `${IMAGE_URI}/${each.Dir}`
             })

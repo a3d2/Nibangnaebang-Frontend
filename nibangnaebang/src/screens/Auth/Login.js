@@ -110,13 +110,13 @@ class Login extends React.Component {
                         회원가입
                     </RegisterText>
                 </RegisterButton>
-                <TourButton
+                {/* <TourButton
                     onPress={this.onPressTour}
                 >
                     <TourText>
                         둘러보기
                     </TourText>
-                </TourButton>
+                </TourButton> */}
             </KeyboardAwareScrollView>
         );
     }

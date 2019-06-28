@@ -52,8 +52,9 @@ class RegisterInfo extends React.Component {
                     paddingTop:getStatusBarHeight()
                 }}
             >
-                <BackButton>
-                </BackButton>
+                <BackButtonContainer>
+                    <BackButton/>
+                </BackButtonContainer>
                 <Title>
                     회원가입
                 </Title>
@@ -113,6 +114,9 @@ RegisterInfo.defaultProps = {
 }
 
 const Container = styled.ScrollView`
+`;
+const BackButtonContainer = styled.View`
+    left:-18;
 `;
 const Title = styled.Text`
     padding-top:16;
