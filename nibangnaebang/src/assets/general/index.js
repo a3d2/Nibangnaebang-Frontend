@@ -18,6 +18,9 @@ const assets = {
     iconConfirm: require('./iconConfirm.png'),
 
     iconOk: require('./iconOk.png'),
+
+    iconMan: require('./iconMan.png'),
+    iconWoman: require('./iconWoman.png'),
 };
 
 export default assets
