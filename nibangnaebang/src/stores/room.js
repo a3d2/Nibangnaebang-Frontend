@@ -83,5 +83,27 @@ class RoomStore {
             console.error(error);
         });
     }
+
+    @action
+    search = async (searchKey, opt) => {
+        return fetch(`${BASE_URI}`, {
+            method: 'POST',
+            body:getBody({
+                query:"searchFilter",
+                searchKey:searchKey,
+                opt:opt
+            })
+        })
+        .then(res => res.json())
+        .then((result) => {
+            return new Promise((resolve, _) => {
+                resolve(result);
+            })
+        })
+        .catch(error => {
+            this.fetching = false;
+            console.error(error);
+        });
+    }
 }
 export default new RoomStore();

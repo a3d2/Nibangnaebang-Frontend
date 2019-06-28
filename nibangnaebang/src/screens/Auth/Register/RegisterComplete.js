@@ -9,19 +9,23 @@ import colors from '../../../colors/colors'
 import assets from "@assets/general";
 
 @inject(stores => ({
-    login:stores.auth.login
+    registerComplete:stores.auth.registerComplete
 }))
 class RegisterComplete extends React.Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
+            
         }
     }
 
     onPressStart = () => {
-        const { login } = this.props;
-        login();
+        const { registerComplete } = this.props;
+        const { params } = this.props.navigation.state;
+        console.log("TCL: RegisterComplete -> onPressStart -> params", params)
+        registerComplete(params);
     }
 
     render() {

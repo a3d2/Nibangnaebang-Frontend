@@ -106,8 +106,16 @@ export const capitalizeFirst = (str) => {
     return str && str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export const getBody = (object) => {
+export const getBody = (object, file) => {
     const formData = new FormData()
     formData.append('jsonString', JSON.stringify(object));
+
+    const uri = file.path;
+    const ext = uri.split('.').pop();
+    const fileName = file.filename;
+
+    file = { uri: uri, name: fileName, type: `image/${ext}` };
+    formData.append('file', file);
+    
     return formData;
 }

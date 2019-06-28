@@ -1,8 +1,8 @@
 import { observable, action } from "mobx";
 import faker from 'faker';
 import { BASE_URI } from "../constants/const";
-import { getBody, showAlert } from "../utils/utils";
-import { AsyncStorage } from 'react-native';
+import { getBody, showAlert, urlToBlob } from "../utils/utils";
+import { AsyncStorage, DeviceEventEmitter } from 'react-native';
 
 class AuthStore {
     @observable user = {
@@ -30,7 +30,6 @@ class AuthStore {
         .then((user) => {
             if(user.IsExistUser) {
                 this.user = user;
-                global.userNo = user.UserNo;
 
                 AsyncStorage.setItem('id', id);
                 AsyncStorage.setItem('pw', pw);
@@ -50,10 +49,12 @@ class AuthStore {
     }
 
     @action
-    register = async (id, pw, school, idCardImg) => {
-        console.log("TCL: register -> idCardImg", idCardImg)
+    register = async (id, pw, school, image) => {    
         return fetch(`${BASE_URI}`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
             body:getBody({
                 query:"SignUp",
                 user:{
@@ -61,33 +62,33 @@ class AuthStore {
                     pwd:pw,
                     gender:'male',
                     school:school,
-                    token:'a',
-                    idCardImg:idCardImg,
+                    token:'t'
                 }
-            })
+            }, image)
         })
         .then(res => res.json())
         .then((user) => {
-            console.log("TCL: user", user)
-            // if(user.IsExistUser) {
-            //     this.user = user;
-            //     global.userNo = user.UserNo;
+            if(user.ResMsg === "Success") {
+                user.UserNo = user.No;
 
-            //     AsyncStorage.setItem('id', id);
-            //     AsyncStorage.setItem('pw', pw);
-            // } else {
-            //     showAlert('없는 사용자에요')
-            //     AsyncStorage.removeItem('id');
-            //     AsyncStorage.removeItem('pw');
-            // }
-            // return new Promise((resolve, _) => {
-            //     resolve();
-            // })
+                AsyncStorage.setItem('id', id);
+                AsyncStorage.setItem('pw', pw);
+
+                return new Promise((resolve, _) => {
+                    resolve(user);
+                })
+            }
         })
         .catch(error => {
             this.fetching = false;
             console.error(error);
         });
+    }
+
+    @action
+    registerComplete = (user) => {
+        this.user = user;
+        DeviceEventEmitter.emit('registerComplete');
     }
 
 

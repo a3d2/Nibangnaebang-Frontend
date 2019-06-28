@@ -20,7 +20,9 @@ import { getStatusBarHeight } from 'react-native-iphone-x-helper';
     
     return {
         navTo:stores.nav.navTo,
-        rooms:roomsArray
+        rooms:roomsArray,
+        user:stores.auth.user,
+        searchRoom:stores.room.search
     }
 })
 class RoomList extends React.Component {
@@ -30,7 +32,15 @@ class RoomList extends React.Component {
         this.state = {
             filterVisible:false,
             mapVisible:false,
-            region:{}
+            region:{},
+            searchValue:'',
+
+            switchValue:undefined,
+            price:0,
+            startDate:null,
+            endDate:null,
+
+            searching:false,
         }
     }
     componentDidMount() {
@@ -75,14 +85,54 @@ class RoomList extends React.Component {
     closeMap = () => {
         this.setState({ mapVisible:false })
     }
-    onConfirmFilter = () => {
+    onSearchInputChange = (value) => {
+        const searching = !!value;
+        this.setState({ searchValue:value, searching:searching }, this.search)
+    }
 
+
+    onSwitcherValueChange = (value) => {
+        this.setState({ switchValue:value });
+    }
+    onPriceChange = (value) => {
+        this.setState({ price:value });
+    }
+    onSelectDates = (start, end) => {
+        this.setState({ startDate:start, endDate:end });
+    }
+
+    onConfirmFilter = () => {
+        this.closeFilter();
+        this.search();
+    }
+
+    search = () => {
+        const { searchRoom, user } = this.props;
+        const { searchValue, switchValue, price, startDate, endDate } = this.state;
+
+        let options = [];
+        if(switchValue) {
+            options.push(`#Gender=${user.Gender}`)
+        }
+        if(price) {
+            options.push(`#Price=${price}`)
+        }
+        if(startDate && endDate) {
+            options.push(`#During=${startDate.dateString}~${endDate.dateString}`)
+        }
+
+        searchRoom(searchValue, options.join('|')).then(result => {
+            this.setState({
+                searchResult:result
+            })
+        });
     }
 
     render() {
-        const { rooms } = this.props;
-        const { filterVisible, mapVisible, region } = this.state;
-
+        let { rooms } = this.props;
+        const { searchValue, searching, filterVisible, mapVisible, searchResult, region } = this.state;
+        
+        rooms = (searching ? searchResult : rooms) || []
         if(!rooms) return;
 
         const roomsView = rooms.map((each) => {
@@ -99,15 +149,15 @@ class RoomList extends React.Component {
             <Container>
                 <SearchContainer>
                     <SearchInput
-                        placeholder={'학교나 장소를 입력해주세요'}
-                        // onSearchInputChange={this.onSearchInputChange}
-                        // onSearch={this.search}
+                        placeholder={'학교를 입력해주세요'}
+                        onSearchInputChange={this.onSearchInputChange}
+                        onSearch={this.search}
                     />
                 </SearchContainer>
                 <HeaderContainer>
                     <CountContainer>
                         <CountText>
-                            {`검색결과 ${rooms.length}건`}
+                            {`${searchValue} 검색결과 ${rooms.length}건`}
                         </CountText>
                     </CountContainer>
                     <ButtonContainer>
@@ -140,8 +190,11 @@ class RoomList extends React.Component {
                         <FilterInnerContainer>
                             <FilterView
                                 periodTitle={`거주 기간`}
-                                priceTitle={`가격 범위`}
+                                priceTitle={`가격`}
                                 genderTitle={`성별`}
+                                onSelectDates={this.onSelectDates}
+                                onPriceChange={this.onPriceChange}
+                                onSwitchValueChange={this.onSwitcherValueChange}
                             />
                             <FilterButtonContainer>
                                 <NormalButton

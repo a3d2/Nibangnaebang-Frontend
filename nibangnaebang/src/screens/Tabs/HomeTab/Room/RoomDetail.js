@@ -70,9 +70,9 @@ class RoomDetail extends React.Component {
                             {`${roomDetail.School}`}
                         </ProfileSchoolText>
                     </ProfileInfoContainer>
-                    <MapButton>
+                    {/* <MapButton>
                         <MapIcon source={assets.iconMap}/>
-                    </MapButton>
+                    </MapButton> */}
                 </ProfileContainer>
 
                 <Divider/>

@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { inject } from 'mobx-react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, DeviceEventEmitter } from 'react-native';
 import TabNavigator from "../navigators/TabNavigator";
 import AuthNavigator from "./Auth/index";
 
 @inject(stores => ({
     spinning:stores.spinner.spinning,
     user:stores.auth.user,
+    UserNo:stores.auth.user.UserNo,
     login:stores.auth.login
 }))
 class Splash extends React.Component {
@@ -28,14 +29,17 @@ class Splash extends React.Component {
         const pw = await AsyncStorage.getItem('pw');
         if(id && pw)
             await login(id, pw);
+
+        DeviceEventEmitter.addListener('registerComplete', this.forceUpdate)
     }
 
     render() {
         // A. navigate to tab if logged in
-        const { spinning, user } = this.props;
+        const { spinning, user, UserNo } = this.props;
+        console.log("TCL: render -> UserNo", UserNo)
         
         // if(true || user.UserNo) {
-        if(user.UserNo) {
+        if(UserNo) {
             return(
                 <NavigatorContainer>
                     <TabNavigator/>

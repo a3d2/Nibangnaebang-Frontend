@@ -28,16 +28,17 @@ class RegisterAuth extends React.Component {
 
     onPressAuth = () => {
         const { navTo, register } = this.props;
-        const { id, passwrord, school, image } = this.state;
-        register(id, passwrord, school, image.sourceURL);
-        // navTo('RegisterComplete');
+        const { id, password, school, image } = this.state;
+        register(id, password, school, image).then((user) => {
+            navTo('RegisterComplete', user);
+        });
     }
 
     openCamera = () => {
         // ImagePicker.openCamera({
         ImagePicker.openPicker({
-            width: 300,
-            height: 400,
+            width: 139,
+            height: 187,
             cropping: true,
         }).then(image => {
             this.setState({ image:image })
