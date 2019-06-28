@@ -4,6 +4,7 @@ import { inject } from 'mobx-react';
 import { AsyncStorage, DeviceEventEmitter } from 'react-native';
 import TabNavigator from "../navigators/TabNavigator";
 import AuthNavigator from "./Auth/index";
+import logoAssets from '../assets/logo';
 
 @inject(stores => ({
     spinning:stores.spinner.spinning,
@@ -17,6 +18,7 @@ class Splash extends React.Component {
         super(props);
 
         this.state = {
+            waiting:false
         }
         
         console.disableYellowBox = true;
@@ -26,8 +28,10 @@ class Splash extends React.Component {
         const { login } = this.props;
         const id = await AsyncStorage.getItem('id');
         const pw = await AsyncStorage.getItem('pw');
-        if(id && pw)
+        if(id && pw) {
+            this.setState({ waiting:true })
             await login(id, pw);
+        }
 
         // DeviceEventEmitter.addListener('registerComplete', this.forceUpdate)
     }
@@ -35,6 +39,7 @@ class Splash extends React.Component {
     render() {
         // A. navigate to tab if logged in
         const { spinning, user } = this.props;
+        const { waiting } = this.state;
         
         // if(true || user.UserNo) {
         if(user.UserNo) {
@@ -43,10 +48,8 @@ class Splash extends React.Component {
                     <TabNavigator/>
                 </NavigatorContainer>
             )
-        }
-
-        // B. display login page if user needs login
-        if(true) {   //TODO to login
+        } 
+        if(user.UserNo && !waiting) {
             return(
                 <NavigatorContainer>
                     <AuthNavigator/>
@@ -56,9 +59,8 @@ class Splash extends React.Component {
 
         return (
             <Container>
-                <Copyright>
-                    A3D2
-                </Copyright>
+                <MainIcon source={logoAssets.mainIcon}/>
+                <MainCopy source={logoAssets.mainCopy}/>
             </Container>
         );
     }
@@ -75,11 +77,16 @@ const Container = styled.View`
     align-items:center;
 `
 
-const Copyright = styled.Text`
+const MainIcon = styled.Image`
+    width:94;
+    height:93;
+`;
+
+const MainCopy = styled.Image`
     position:absolute;
-    align-self: center;
-    text-align: center;
-    bottom: 40;
+    bottom:44;
+    width:106;
+    height:28;
 `;
 
 export default Splash;

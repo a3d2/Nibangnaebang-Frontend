@@ -43,7 +43,7 @@ class MyPage extends React.Component {
 
     render() {
         const { user, logout } = this.props;
-        console.log("TCL: MyPage -> render -> user", user)
+            console.log("TCL: MyPage -> render -> user", user)
 
         return (
             <Container>
